@@ -16,7 +16,7 @@ public class SampleIT extends JUnit4CitrusTestDesigner {
   public void EchoSampleIT() {
 
     variable("time", "citrus:currentDate()");
-    echo("Hello Citrus!");
+    echo("\n\n\nHello Citrus!\n\n\n");
     echo("CurrentTime is: ${time}");
   }
 
