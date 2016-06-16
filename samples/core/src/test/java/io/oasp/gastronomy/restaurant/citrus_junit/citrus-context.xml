@@ -6,5 +6,8 @@ xmlns:context="http://www.springframework.org/schema/context"
 xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-http://www.citrusframework.org/schema/config http://www.citrusframework.org/schema/config/citrus-config.xsd
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 <citrus:schema-repository id="schemaRepository" />
+<citrus-jms:endpoint id="helloServiceEndpoint"
+destination-name="Citrus.HelloService.Request.Queue"
+connection-factory="myConnectionFacotry"/>
 <bean id="customTestListener" class="io.oasp.gastronomy.restaurant.general.configuration.MyCustomCitrusConfig"></bean>
 </beans>
