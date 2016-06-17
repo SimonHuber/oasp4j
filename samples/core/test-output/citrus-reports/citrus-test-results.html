@@ -104,11 +104,11 @@
                     </tr>
                     <tr class="even">
                         <th>Failed</th>
-                        <td>0&nbsp;&nbsp;|&nbsp;&nbsp;0.0%</td>
+                        <td>1&nbsp;&nbsp;|&nbsp;&nbsp;100.0%</td>
                     </tr>
                     <tr class="odd">
                         <th>Successful</th>
-                        <td>1&nbsp;&nbsp;|&nbsp;&nbsp;100.0%</td>
+                        <td>0&nbsp;&nbsp;|&nbsp;&nbsp;0.0%</td>
                     </tr>
                 </tbody>
             </table>
@@ -116,21 +116,64 @@
             <h1>Tests results (1 Tests)</h1>
             <table id="test-results"> 
                 <tbody> 
-                    <tr class="success" onmouseover="showTooltip('SendMessageTestInfo', event);" onmouseout="hideTooltip();">
-    <th>SendMessageTest
-        <span class="tooltip" id="SendMessageTestInfo">
-        <b><i>SendMessageTest</i></b><br/>
+                    <tr class="failure" onmouseover="showTooltip('HttpAction.httpActionTestInfo', event);" onmouseout="hideTooltip();">
+    <th>HttpAction.httpActionTest
+        <span class="tooltip" id="HttpAction.httpActionTestInfo">
+        <b><i>HttpAction.httpActionTest</i></b><br/>
         <b>Author:</b> N/A<br/>
         <b>Status:</b> DRAFT<br/>
         <b>Creation Date:</b> N/A<br/>
         <b>Last updated by:</b> N/A<br/>
         <b>Last updated on:</b> N/A<br/>
-        <b>Description:</b> Basic send message example<br/>
+        <b>Description:</b> N/A<br/>
         </span>
     </th>
-    <td>SUCCESS</td>
+    <td>FAILURE</td>
 </tr>
-
+<tr><td colspan="2"><div class="error-detail"><pre>com.consol.citrus.exceptions.InvalidFunctionUsageException: Function parameters must not be empty
+ 
+	 at com.consol.citrus.functions.core.RandomNumberFunction.execute(RandomNumberFunction.java:46)
+	 at com.consol.citrus.functions.FunctionUtils.resolveFunction(FunctionUtils.java:143)
+	 at com.consol.citrus.functions.FunctionUtils.replaceFunctionsInString(FunctionUtils.java:96)
+	 at com.consol.citrus.context.TestContext.replaceDynamicContentInString(TestContext.java:255)
+	 at com.consol.citrus.context.TestContext.replaceDynamicContentInString(TestContext.java:241)
+	 at com.consol.citrus.validation.builder.StaticMessageContentBuilder.buildMessagePayload(StaticMessageContentBuilder.java:70)
+	 at com.consol.citrus.validation.builder.AbstractMessageContentBuilder.buildMessageContent(AbstractMessageContentBuilder.java:58)
+	 at com.consol.citrus.validation.builder.StaticMessageContentBuilder.buildMessageContent(StaticMessageContentBuilder.java:63)
+	 at com.consol.citrus.actions.SendMessageAction.createMessage(SendMessageAction.java:131)
+	 at com.consol.citrus.actions.SendMessageAction.doExecute(SendMessageAction.java:85)
+	 at com.consol.citrus.actions.AbstractTestAction.execute(AbstractTestAction.java:42)
+	 at com.consol.citrus.dsl.actions.DelegatingTestAction.doExecute(DelegatingTestAction.java:40)
+	 at com.consol.citrus.actions.AbstractTestAction.execute(AbstractTestAction.java:42)
+	 at com.consol.citrus.TestCase.executeAction(TestCase.java:211)
+	 at com.consol.citrus.TestCase.doExecute(TestCase.java:139)
+	 at com.consol.citrus.actions.AbstractTestAction.execute(AbstractTestAction.java:42)
+	 at com.consol.citrus.Citrus.run(Citrus.java:243)
+	 at com.consol.citrus.dsl.junit.JUnit4CitrusTest.invokeTestMethod(JUnit4CitrusTest.java:90)
+	 at com.consol.citrus.dsl.junit.JUnit4CitrusTestDesigner.invokeTestMethod(JUnit4CitrusTestDesigner.java:68)
+	 at com.consol.citrus.dsl.junit.JUnit4CitrusTest.run(JUnit4CitrusTest.java:71)
+	 at com.consol.citrus.junit.CitrusJUnit4Runner$InvokeRunMethod.evaluate(CitrusJUnit4Runner.java:212)
+	 at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:75)
+	 at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:86)
+	 at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:84)
+	 at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
+	 at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:254)
+	 at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:89)
+	 at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
+	 at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
+	 at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
+	 at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
+	 at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
+	 at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
+	 at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
+	 at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
+	 at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:193)
+	 at org.eclipse.jdt.internal.junit4.runner.JUnit4TestReference.run(JUnit4TestReference.java:86)
+	 at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:38)
+	 at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:459)
+	 at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:675)
+	 at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:382)
+	 at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:192)</pre></div></td></tr>
                 </tbody>
             </table>
         </div>

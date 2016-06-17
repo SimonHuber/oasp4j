@@ -10,6 +10,9 @@ public class SendMessageTestDesigner extends JUnit4CitrusTestDesigner {
   @CitrusTest(name = "SendMessageTest")
   public void sendMessageTest() {
 
+    // TODO ?? why global variables do not work
+    // echo("\n\n\nprojectName: ${userName}\n\n\n");
+
     description("Basic send message example");
     send("helloServiceEndpoint").payload("<TestMessage>" + "<Text>Hello!</Text>" + "</TestMessage>").header("Operation",
         "sayHello");

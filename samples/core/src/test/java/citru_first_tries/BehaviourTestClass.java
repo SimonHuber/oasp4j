@@ -20,7 +20,7 @@ public class BehaviourTestClass extends JUnit4CitrusTestDesigner {
   public void behaviorTest(@CitrusResource TestContext context) {
 
     description("\n\n\n\nThis is a behavior Test\n\n\n\n");
-    status(Status.DISABLED);
+    status(Status.FINAL);
 
     author("\n\n\n\nChristoph\n\n\n\n");
     // status(TestCaseMetaInfo.Status.FINAL);
@@ -33,7 +33,7 @@ public class BehaviourTestClass extends JUnit4CitrusTestDesigner {
     echo("\n\n\n\nSuccessfully applied foo behavior\n\n\n\n");
     applyBehavior(new BarBehavior());
     echo("Successfully applied bar behavior");
-
+    echo("\n\n\nuserName:    ${userName2}\n\n\n");
     // because of the TestDesigner's feature to build up the test first, only the value "varAfter" is printed
     variable("testVar", "varAfter");
     echo("testVarAfter:    ${testVar}");
