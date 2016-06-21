@@ -19,7 +19,7 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.web.client.RestTemplate;
 
 import io.oasp.gastronomy.restaurant.SpringBootApp;
-import io.oasp.module.basic.configuration.OaspProfile;
+import io.oasp.module.basic.configuration.SpringProfileConstants;
 import io.oasp.module.test.common.base.SubsystemTest;
 
 /**
@@ -40,7 +40,7 @@ import io.oasp.module.test.common.base.SubsystemTest;
 // Bean definition profiles: mechanism for registration of different beans in
 // different environments
 // @ActiveProfiles(profiles = { OaspProfile.JUNIT_TEST }): Activate Profile "OaspProfile.JUNIT_TEST"
-@ActiveProfiles(profiles = { OaspProfile.JUNIT_TEST })
+@ActiveProfiles(profiles = { SpringProfileConstants.JUNIT })
 
 public class TablemanagementWebRestServiceTest extends SubsystemTest {
 

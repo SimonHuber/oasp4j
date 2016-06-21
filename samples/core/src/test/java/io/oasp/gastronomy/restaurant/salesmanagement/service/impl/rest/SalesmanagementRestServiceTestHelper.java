@@ -96,7 +96,7 @@ public class SalesmanagementRestServiceTestHelper {
     this.flyway.clean();
     this.flyway.migrate();
     this.service = RestTestClientBuilder.build(SalesmanagementRestService.class, ROLE, ROLE,
-        BASE_URL_PRAEFIX + port + BASE_URL_SUFFIX_1, this.jacksonJsonProvider);
+        BASE_URL_PRAEFIX + port + BASE_URL_SUFFIX_1);
     INITIAL_NUMBER_OF_ORDER_POSITIONS = getNumberOfOrderPositions();
     INITIAL_NUMBER_OF_ORDERS = getNumberOfOrders();
 

@@ -44,7 +44,7 @@ import io.oasp.gastronomy.restaurant.SpringBootApp;
 import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.OrderCto;
 import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.OrderEto;
 import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.OrderPositionEto;
-import io.oasp.module.basic.configuration.OaspProfile;
+import io.oasp.module.basic.configuration.SpringProfileConstants;
 import io.oasp.module.test.common.base.SubsystemTest;
 
 /**
@@ -56,7 +56,7 @@ import io.oasp.module.test.common.base.SubsystemTest;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = { SpringBootApp.class, SalesmanagementRestTestConfiguration.class })
 @WebIntegrationTest("server.port:0")
-@ActiveProfiles(profiles = { OaspProfile.JUNIT_TEST })
+@ActiveProfiles(profiles = { SpringProfileConstants.JUNIT })
 @Transactional
 
 public class SalesmanagementWebRestServiceTest extends SubsystemTest {

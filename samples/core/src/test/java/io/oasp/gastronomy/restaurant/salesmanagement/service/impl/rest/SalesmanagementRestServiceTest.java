@@ -30,7 +30,7 @@ import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.OrderCto;
 import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.OrderEto;
 import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.OrderPositionEto;
 import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.OrderSearchCriteriaTo;
-import io.oasp.module.basic.configuration.OaspProfile;
+import io.oasp.module.basic.configuration.SpringProfileConstants;
 import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 import io.oasp.module.jpa.common.api.to.PaginationTo;
 import io.oasp.module.test.common.base.SubsystemTest;
@@ -49,7 +49,7 @@ import io.oasp.module.test.common.base.SubsystemTest;
 @WebIntegrationTest("server.port:0")
 // activate a profile, to use beans defined in profile @Profile(OaspProfile.JUNIT_TEST)
 // in file TestWebSecurity
-@ActiveProfiles(profiles = { OaspProfile.JUNIT_TEST })
+@ActiveProfiles(profiles = { SpringProfileConstants.JUNIT })
 
 // runs also without the following
 @Transactional
