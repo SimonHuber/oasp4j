@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:citrus="http://www.citrusframework.org/schema/config"
-       xmlns:citrus-mail="http://www.citrusframework.org/schema/mail/config"
-       xmlns:citrus-jms="http://www.citrusframework.org/schema/jms/config"
-       xmlns:citrus-http="http://www.citrusframework.org/schema/http/config"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:citrus="http://www.citrusframework.org/schema/config" xmlns:citrus-mail="http://www.citrusframework.org/schema/mail/config"
+  xmlns:citrus-jms="http://www.citrusframework.org/schema/jms/config" xmlns:citrus-http="http://www.citrusframework.org/schema/http/config"
+  xmlns:context="http://www.springframework.org/schema/context"
+  xsi:schemaLocation="
        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
        http://www.citrusframework.org/schema/config http://www.citrusframework.org/schema/config/citrus-config.xsd
@@ -19,7 +16,17 @@
     <citrus:file path="classpath:global-variable.properties"/>
   </citrus:global-variables>
 
-  <citrus-http:client id="httpClient" request-url="http://localhost:8080/hello" request-method="GET"
-    content-type="application/xml" timeout="60000"/>
+<!--   <citrus-http:client id="httpClient" request-url="http://localhost:8080/hello" request-method="GET" -->
+<!--     content-type="application/xml" timeout="60000"/> -->
+
+  <citrus-http:client id="salesmanagementClient" request-url="http://localhost:9000/services/rest/tablemanagement/v1/" request-method="GET"
+    content-type="application/json" timeout="60000"/>
+
+     <citrus-http:client id="salesmanagementClientPost" request-url="http://localhost:9000/services/rest/tablemanagement/v1/" request-method="POST"
+    content-type="application/json" timeout="60000"/>
+
+<!--   <citrus-http:server id="helloHttpServer" port="8081" auto-start="true" resource-base="src/it/resources"/> -->
+
+
 
 </beans>
