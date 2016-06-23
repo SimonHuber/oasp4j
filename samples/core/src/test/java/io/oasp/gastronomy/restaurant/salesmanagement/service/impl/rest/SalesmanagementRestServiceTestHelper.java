@@ -1,64 +1,36 @@
 package io.oasp.gastronomy.restaurant.salesmanagement.service.impl.rest;
 
 import java.math.BigDecimal;
-import java.util.List;
 
-import org.flywaydb.core.Flyway;
-
-import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
-
-import io.oasp.gastronomy.restaurant.general.common.RestTestClientBuilder;
+import io.oasp.gastronomy.restaurant.common.builders.OrderEtoBuilder;
+import io.oasp.gastronomy.restaurant.common.builders.OrderPositionEtoBuilder;
 import io.oasp.gastronomy.restaurant.general.common.api.datatype.Money;
 import io.oasp.gastronomy.restaurant.salesmanagement.common.api.datatype.OrderPositionState;
 import io.oasp.gastronomy.restaurant.salesmanagement.common.api.datatype.OrderState;
 import io.oasp.gastronomy.restaurant.salesmanagement.common.api.datatype.ProductOrderState;
-import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.Salesmanagement;
 import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.OrderCto;
 import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.OrderEto;
 import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.OrderPositionEto;
-import io.oasp.gastronomy.restaurant.salesmanagement.service.api.rest.SalesmanagementRestService;
-import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 
 /**
- * TODO shuber This type ...
+ * This is a helper class for the classes {@link SalesmanagementRestServiceTest} and
+ * {@link SalesmanagementHttpRestServiceTest}. It capsulates some sample attributes as constants used both testing
+ * classes. Moreover it provides two methods to create sample {@link OrderCto} and {@link OrderPositionEto} objects
+ * using the sample attributes defined by this class.
  *
  * @author shuber
- * @since dev
  */
-
 public class SalesmanagementRestServiceTestHelper {
-
-  protected JacksonJsonProvider jacksonJsonProvider;
-
-  // TODO just workaraound, as Jonas solution is not yet approved
-
-  protected Flyway flyway;
-
-  protected Salesmanagement salesmanagement;
-
-  /**
-   * The constructor.
-   *
-   * @param jacksonJsonProvider
-   * @param flyway
-   * @param salesmanagement
-   */
-  public SalesmanagementRestServiceTestHelper(JacksonJsonProvider jacksonJsonProvider, Flyway flyway,
-      Salesmanagement salesmanagement) {
-    this.jacksonJsonProvider = jacksonJsonProvider;
-    this.flyway = flyway;
-    this.salesmanagement = salesmanagement;
-  }
-
-  protected static long INITIAL_NUMBER_OF_ORDERS = 0;
-
-  protected static long INITIAL_NUMBER_OF_ORDER_POSITIONS = 0;
 
   protected static final String ROLE = "chief";
 
-  protected static final long SAMPLE_OFFER_ID = 6L;
+  protected static final long SAMPLE_OFFER_ID = 4L;
 
-  protected static final String SAMPLE_OFFER_NAME = "Pizza-Menü";
+  protected static final int NUMBER_OF_SAMPLE_ORDERS = 2;
+
+  protected static final int NUMBER_OF_SAMPLE_ORDER_POSITIONS = 2;
+
+  protected static final String SAMPLE_OFFER_NAME = "Salat-Menü";
 
   protected static final OrderState SAMPLE_ORDER_STATE = OrderState.OPEN;
 
@@ -66,13 +38,11 @@ public class SalesmanagementRestServiceTestHelper {
 
   protected static final ProductOrderState SAMPLE_DRINK_STATE = ProductOrderState.DELIVERED;
 
-  protected static final Money SAMPLE_PRICE = new Money(new BigDecimal("6.23"));
+  protected static final Money SAMPLE_PRICE = new Money(new BigDecimal("5.99"));
 
   protected static final String SAMPLE_COMMENT = null;
 
   protected static final long SAMPLE_TABLE_ID = 101;
-
-  protected SalesmanagementRestService service;
 
   protected static final String BASE_URL_PRAEFIX = "http://localhost:";
 
@@ -83,77 +53,31 @@ public class SalesmanagementRestServiceTestHelper {
   protected static long numberOfOrderPositions = 0;
 
   /**
-   * @return service
+   * This method creates a sample {@link OrderCto} depending on the constants defined by this class.
+   *
+   * @param tableId
+   * @return {@link OrderCto}
    */
-  public SalesmanagementRestService getService() {
-
-    return this.service;
-  }
-
-  // @PostConstruct
-  public void init(int port) {
-
-    this.flyway.clean();
-    this.flyway.migrate();
-    this.service = RestTestClientBuilder.build(SalesmanagementRestService.class, ROLE, ROLE,
-        BASE_URL_PRAEFIX + port + BASE_URL_SUFFIX_1);
-    INITIAL_NUMBER_OF_ORDER_POSITIONS = getNumberOfOrderPositions();
-    INITIAL_NUMBER_OF_ORDERS = getNumberOfOrders();
-
-  }
-
-  // @PreDestroy
-  // public void destroy() {
-  //
-  // }
-
-  // // @Before
-  // public void prepareTest() {
-  //
-  // flyway.clean();
-  // flyway.migrate();
-  // }
-
-  public OrderPositionEto createSampleOrderPositionEto(long orderId) {
-
-    OrderPositionEto orderPositionEto = new OrderPositionEto();
-    orderPositionEto.setOrderId(orderId);
-    orderPositionEto.setOfferId(SAMPLE_OFFER_ID);
-    orderPositionEto.setOfferName(SAMPLE_OFFER_NAME);
-    orderPositionEto.setState(SAMPLE_ORDER_POSITION_STATE);
-    orderPositionEto.setDrinkState(SAMPLE_DRINK_STATE);
-    orderPositionEto.setPrice(SAMPLE_PRICE);
-    orderPositionEto.setComment(SAMPLE_COMMENT);
-    return orderPositionEto;
-  }
-
   protected OrderCto createSampleOrderCto(long tableId) {
 
     OrderCto sampleOrderCto = new OrderCto();
-    OrderEto sampleOrderEto = new OrderEto();
-    sampleOrderEto.setTableId(tableId);
+    OrderEto sampleOrderEto = new OrderEtoBuilder().tableId(SAMPLE_TABLE_ID).createNew();
     sampleOrderCto.setOrder(sampleOrderEto);
     return sampleOrderCto;
   }
 
-  protected long getNumberOfOrders() {
+  /**
+   * This method creates a sample {@link OrderPositionEto} depending on the constants defined by this class.
+   *
+   * @param orderId
+   * @return {@link OrderPositionEto}
+   */
+  public OrderPositionEto createSampleOrderPositionEto(long orderId) {
 
-    long numberOfOrders = 0;
-    PaginatedListTo<OrderCto> orderPositions = this.service.findOrders(null);
-    if (orderPositions != null) {
-      numberOfOrders = orderPositions.getResult().size();
-    }
-    return numberOfOrders;
-  }
-
-  protected long getNumberOfOrderPositions() {
-
-    long numberOfOrderPositions = 0;
-    List<OrderPositionEto> orderPositions = this.service.findOrderPositions(null);
-    if (orderPositions != null) {
-      numberOfOrderPositions = orderPositions.size();
-    }
-    return numberOfOrderPositions;
+    OrderPositionEto sampleOrderPositionEto = new OrderPositionEtoBuilder().orderId(orderId).offerId(SAMPLE_OFFER_ID)
+        .offerName(SAMPLE_OFFER_NAME).state(SAMPLE_ORDER_POSITION_STATE).drinkState(SAMPLE_DRINK_STATE)
+        .price(SAMPLE_PRICE).comment(SAMPLE_COMMENT).createNew();
+    return sampleOrderPositionEto;
   }
 
 }
