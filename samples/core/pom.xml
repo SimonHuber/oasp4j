@@ -307,8 +307,15 @@
       <groupId>org.skyscreamer</groupId>
       <artifactId>jsonassert</artifactId>
       <version>1.3.0</version>
-    <scope>test</scope>
+      <scope>test</scope>
     </dependency>
+
+<dependency>
+  <groupId>com.consol.citrus</groupId>
+  <artifactId>citrus-arquillian</artifactId>
+  <version>2.5.2</version>
+  <scope>test</scope>
+</dependency>
 
   </dependencies>
 

@@ -1,12 +1,13 @@
 package citru_first_tries;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import com.consol.citrus.TestCaseMetaInfo.Status;
 import com.consol.citrus.annotations.CitrusResource;
 import com.consol.citrus.annotations.CitrusTest;
 import com.consol.citrus.context.TestContext;
-import com.consol.citrus.dsl.junit.JUnit4CitrusTestDesigner;
+import com.consol.citrus.dsl.junit.JUnit4CitrusTestRunner;
 
 /**
  * TODO shuber This type ...
@@ -14,7 +15,8 @@ import com.consol.citrus.dsl.junit.JUnit4CitrusTestDesigner;
  * @author shuber
  * @since dev
  */
-public class BehaviourTestClass extends JUnit4CitrusTestDesigner {
+@RunWith(JUnit4CitrusTestRunner.class)
+public class BehaviourTestClass extends JUnit4CitrusTestRunner {
   @Test
   @CitrusTest
   public void behaviorTest(@CitrusResource TestContext context) {
