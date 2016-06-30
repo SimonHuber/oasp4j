@@ -1,13 +1,13 @@
 package citru_first_tries;
 
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
 import com.consol.citrus.TestCaseMetaInfo.Status;
 import com.consol.citrus.annotations.CitrusResource;
 import com.consol.citrus.annotations.CitrusTest;
 import com.consol.citrus.context.TestContext;
 import com.consol.citrus.dsl.junit.JUnit4CitrusTestRunner;
+import com.consol.citrus.dsl.runner.TestBehavior;
 
 /**
  * TODO shuber This type ...
@@ -15,7 +15,7 @@ import com.consol.citrus.dsl.junit.JUnit4CitrusTestRunner;
  * @author shuber
  * @since dev
  */
-@RunWith(JUnit4CitrusTestRunner.class)
+
 public class BehaviourTestClass extends JUnit4CitrusTestRunner {
   @Test
   @CitrusTest
@@ -31,9 +31,9 @@ public class BehaviourTestClass extends JUnit4CitrusTestRunner {
     // echo("\n\n\n\n--------------------------\n\n\n\n");
     // echo("\n\n\ntestVarBefore: ${testVar}\n\n\n");
 
-    applyBehavior(new FooBehavior());
+    applyBehavior((TestBehavior) new FooBehavior());
     echo("\n\n\n\nSuccessfully applied foo behavior\n\n\n\n");
-    applyBehavior(new BarBehavior());
+    applyBehavior((TestBehavior) new BarBehavior());
     echo("Successfully applied bar behavior");
     echo("\n\n\nuserName:    ${userName2}\n\n\n");
     // because of the TestDesigner's feature to build up the test first, only the value "varAfter" is printed

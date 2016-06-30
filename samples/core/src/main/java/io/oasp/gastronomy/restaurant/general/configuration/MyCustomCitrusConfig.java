@@ -41,8 +41,6 @@ public class MyCustomCitrusConfig {
 
     @Override
     public void onTestSuccess(TestCase test) {
-
-      this.testReport.append("\n\n\n\n\n+\n\n\n\n\n");
     }
 
     @Override

@@ -28,8 +28,13 @@
 <!--          <citrus-http:client id="salesmanagementClient" request-url="http://localhost:8090/services/rest/salesmanagement/v1/" request-method="GET" -->
 <!--     content-type="application/json" timeout="60000"/> -->
 
-     <citrus-http:client id="salesmanagementClient" request-url="http://localhost:8081/oasp4j-sample-server/services/rest/salesmanagement/v1/" request-method="POST"
+     <citrus-http:client id="salesmanagementClient" request-url="" request-method="GET"
     content-type="application/json" timeout="60000"/>
+
+<!-- <citrus-http:server id="helloHttpServer" -->
+<!--                 port="8080" -->
+<!--                 auto-start="true" -->
+<!--                 resource-base="new/offers"/> -->
 
 <!--   <citrus-http:server id="helloHttpServer" port="8081" auto-start="true" resource-base="src/it/resources"/> -->
 
