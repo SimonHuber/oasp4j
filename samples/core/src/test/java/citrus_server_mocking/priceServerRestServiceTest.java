@@ -106,26 +106,6 @@ public class priceServerRestServiceTest extends JUnit4CitrusTest {
     });
     t.start();
 
-    // Thread t2 = new Thread(new Runnable() {
-    //
-    // @Override
-    // public void run() {
-    //
-    // designer.echo("\n\n222222222222222222\n\n");
-    // HttpHeaders headers = new HttpHeaders();
-    // // headers.add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
-    // headers.add("Connection", "keep-alive");
-    // HttpEntity<String> getRequest = new HttpEntity<>(headers);
-    // ResponseEntity<String> getResponse = priceServerRestServiceTest.this.template
-    // .exchange("http://localhost:8081/test", HttpMethod.GET, getRequest, String.class);
-    //
-    // designer.echo("\n\n\n" + getResponse + "\n\n\n");
-    // designer.echo("\n\n\n" + getResponse.getBody() + "\n\n\n");
-    // designer.echo("\n\n\n" + getResponse.getHeaders() + "\n\n\n");
-    // }
-    // });
-    // t2.start();
-
     designer.echo("\n\n222222222222222222\n\n");
     HttpHeaders headers = new HttpHeaders();
     // headers.add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8");
