@@ -42,5 +42,7 @@ public class HttpGetRequest {
     HttpEntity<String> getRequest = new HttpEntity<>(headers);
     ResponseEntity<String> getResponse =
         template.exchange("http://localhost:8081/test", HttpMethod.GET, getRequest, String.class);
+    System.out.println(getResponse.getBody());
+
   }
 }

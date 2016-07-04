@@ -1,10 +1,7 @@
 package citrus_server_mocking;
 
-import javax.inject.Inject;
-
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.client.RestTemplate;
 
 import com.consol.citrus.annotations.CitrusResource;
 import com.consol.citrus.annotations.CitrusTest;
@@ -23,9 +20,6 @@ import com.consol.citrus.dsl.junit.JUnit4CitrusTest;
 // @TestPropertySource(properties = { "flyway.locations=filesystem:src/test/resources/db/tablemanagement" })
 public class ExampleServer extends JUnit4CitrusTest {
 
-  @Inject
-  final RestTemplate template = null;
-
   @Test
   @CitrusTest
   public void purge(@CitrusResource TestDesigner designer) {
@@ -40,10 +34,8 @@ public class ExampleServer extends JUnit4CitrusTest {
   public void httpServerActionTest(@CitrusResource TestDesigner designer) {
 
     designer.echo("\n\n111111111111111\n\n");
-    designer.http().server("helloHttpServer").post("/test")
-        .payload("<testRequestMessage>" + "<text>Hello HttpServer</text>" + "</testRequestMessage>")
-        .contentType("text/plain;charset=ISO-8859-1").accept("text/plain,application/json,application/*+json,*/*")
-        .timeout(600000000)
+    designer.http().server("helloHttpServer").get("/test").contentType("text/plain;charset=ISO-8859-1")
+        .accept("text/plain,application/json,application/*+json,*/*").timeout(600000000)
         // .header("CustomHeaderId",
         // "${custom_header_id}")
         // .header("Authorization", "Basic c29tZVVzZXJuYW1lOnNvbWVQYXNzd29yZA==")
