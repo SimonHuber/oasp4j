@@ -30,11 +30,11 @@
 <!--          <citrus-http:client id="salesmanagementClient" request-url="http://localhost:8090/services/rest/salesmanagement/v1/" request-method="GET" -->
 <!--     content-type="application/json" timeout="60000"/> -->
 
-     <citrus-http:client id="salesmanagementClient" request-url="" request-method="GET"
-    content-type="application/json" timeout="60000"/>
 
-         <citrus-http:client id="helloHttpClient" request-url="http://localhost:8081/test" request-method="GET"
-/>
+<citrus-http:client id="helloHttpClient"
+          request-url="http://localhost:8081/test"
+          request-method="GET"
+          timeout="60000"/>
 
 <citrus-http:server id="helloHttpServer"
                 port="8081"

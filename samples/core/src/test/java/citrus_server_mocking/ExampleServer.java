@@ -1,7 +1,11 @@
 package citrus_server_mocking;
 
+import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 import org.junit.Test;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 
 import com.consol.citrus.annotations.CitrusResource;
@@ -42,11 +46,21 @@ public class ExampleServer extends JUnit4CitrusTest {
         // .header("Authorization", "Basic c29tZVVzZXJuYW1lOnNvbWVQYXNzd29yZA==")
         // .extractFromHeader("X-MessageId", "message_id");
     ;
+    byte[] encodedFileContent = null;
+    try {
+      encodedFileContent = Files.readAllBytes(Paths.get("src/test/resources/orderPositionPayload.json"));
+    } catch (IOException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+    String fileContent = new String(encodedFileContent, Charset.defaultCharset());
     designer.echo("\n\n22222222222222222\n\n");
     designer.http().server("helloHttpServer").respond(HttpStatus.OK)
-        .payload(new ClassPathResource("orderPositionPayload.json")).version("HTTP/1.1")
-        // .contentType("text/plain;charset=ISO-8859-1")// .header("CustomHeaderId", "${custom_header_id}")
-        // .header("X-MessageId", "${message_id}");
+        // .payload(new ClassPathResource("orderPositionPayload.json")).version("HTTP/1.1")
+        .payload(fileContent);
+
+    // .contentType("text/plain;charset=ISO-8859-1")// .header("CustomHeaderId", "${custom_header_id}")
+    // .header("X-MessageId", "${message_id}");
     ;
 
     //
