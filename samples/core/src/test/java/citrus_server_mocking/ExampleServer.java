@@ -1,6 +1,7 @@
 package citrus_server_mocking;
 
 import org.junit.Test;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
 
 import com.consol.citrus.annotations.CitrusResource;
@@ -43,9 +44,9 @@ public class ExampleServer extends JUnit4CitrusTest {
     ;
     designer.echo("\n\n22222222222222222\n\n");
     designer.http().server("helloHttpServer").respond(HttpStatus.OK)
-        .payload("<testResponseMessage>" + "<text>Hello Citrus</text>" + "</testResponseMessage>").version("HTTP/1.1")
-        .contentType("text/plain;charset=ISO-8859-1")// .header("CustomHeaderId", "${custom_header_id}")
-    // .header("X-MessageId", "${message_id}");
+        .payload(new ClassPathResource("orderPositionPayload.json")).version("HTTP/1.1")
+        // .contentType("text/plain;charset=ISO-8859-1")// .header("CustomHeaderId", "${custom_header_id}")
+        // .header("X-MessageId", "${message_id}");
     ;
 
     //

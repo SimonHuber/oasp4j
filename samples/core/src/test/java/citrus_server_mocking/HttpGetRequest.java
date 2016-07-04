@@ -3,6 +3,7 @@ package citrus_server_mocking;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -12,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
 
 import io.oasp.gastronomy.restaurant.SpringBootApp;
+import io.oasp.gastronomy.restaurant.general.common.base.AbstractRestServiceTest;
 import io.oasp.gastronomy.restaurant.salesmanagement.service.impl.rest.SalesmanagementRestTestConfiguration;
 
 /**
@@ -23,16 +25,14 @@ import io.oasp.gastronomy.restaurant.salesmanagement.service.impl.rest.Salesmana
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = { SpringBootApp.class, SalesmanagementRestTestConfiguration.class })
 @TestPropertySource(properties = { "flyway.locations=filesystem:src/test/resources/db/tablemanagement" })
-public class HttpGetRequest {
-
-  // private RestTemplate template;
+public class HttpGetRequest extends AbstractRestServiceTest {
 
   /**
    * @param args
    */
 
   @Test
-  public void httpGetRequestAction() {
+  public void httpGetRequestActionTest() {
 
     RestTemplate template = new RestTemplate();
 
@@ -42,6 +42,8 @@ public class HttpGetRequest {
     HttpEntity<String> getRequest = new HttpEntity<>(headers);
     ResponseEntity<String> getResponse =
         template.exchange("http://localhost:8081/test", HttpMethod.GET, getRequest, String.class);
+    assertThat(getResponse).isNotNull();
+    assertThat(getResponse).isEqualTo(new ClassPathResource("orderPositionPayload.json"));
     System.out.println(getResponse.getBody());
 
   }
