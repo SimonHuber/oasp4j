@@ -1,9 +1,8 @@
 package citrus_server_mocking;
 
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import static citrus_server_mocking.ServerMockHelper.GET_ALL_CUSTOMER_DATA;
+import static citrus_server_mocking.ServerMockHelper.GET_ORDER_POSITION;
+import static citrus_server_mocking.ServerMockHelper.getJSONFromFile;
 
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
@@ -36,14 +35,8 @@ public class ExampleServer extends JUnit4CitrusTest {
   @CitrusTest
   public void deliverOrderPosition(@CitrusResource TestDesigner designer) {
 
-    designer.http().server("helloHttpServer").get("/getOrderPosition").accept("application/json").timeout(600000000);
-    byte[] encodedFileContent = null;
-    try {
-      encodedFileContent = Files.readAllBytes(Paths.get("src/test/resources/orderPositionPayload.json"));
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    String fileContent = new String(encodedFileContent, Charset.defaultCharset());
+    designer.http().server("helloHttpServer").get(GET_ORDER_POSITION).accept("application/json").timeout(600000000);
+    String fileContent = getJSONFromFile("src/test/resources/customer.json");
     designer.http().server("helloHttpServer").respond(HttpStatus.OK).payload(fileContent).version("HTTP/1.1")
         .contentType("application/json");
 
@@ -53,14 +46,8 @@ public class ExampleServer extends JUnit4CitrusTest {
   @CitrusTest
   public void deliverAllCustomerDates(@CitrusResource TestDesigner designer) {
 
-    designer.http().server("helloHttpServer").get("/getAllCustomerDates").accept("application/json").timeout(600000000);
-    byte[] encodedFileContent = null;
-    try {
-      encodedFileContent = Files.readAllBytes(Paths.get("src/test/resources/customer.json"));
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    String fileContent = new String(encodedFileContent, Charset.defaultCharset());
+    designer.http().server("helloHttpServer").get(GET_ALL_CUSTOMER_DATA).accept("application/json").timeout(600000000);
+    String fileContent = getJSONFromFile("src/test/resources/customer.json");
     designer.http().server("helloHttpServer").respond(HttpStatus.OK).payload(fileContent).version("HTTP/1.1")
         .contentType("application/json");
   }

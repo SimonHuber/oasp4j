@@ -1,9 +1,10 @@
 package citrus_server_mocking;
 
+import static citrus_server_mocking.ServerMockHelper.GET_ALL_CUSTOMER_DATA;
+import static citrus_server_mocking.ServerMockHelper.GET_ORDER_POSITION;
+import static citrus_server_mocking.ServerMockHelper.getJSONFromFile;
+
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 
 import javax.inject.Inject;
 
@@ -39,6 +40,10 @@ public class HttpGetRequestTests extends AbstractRestServiceTest {
    * @throws IOException
    */
 
+  private final int port = 8081;
+
+  private final String SERVER_URL = "http://localhost:";
+
   @Inject
   private RestTemplate template;
 
@@ -49,17 +54,11 @@ public class HttpGetRequestTests extends AbstractRestServiceTest {
     headers.add(HttpHeaders.ACCEPT, "application/json");
     headers.add(HttpHeaders.CONNECTION, "keep-alive");
     HttpEntity<String> getRequest = new HttpEntity<>(headers);
-    ResponseEntity<String> getResponse =
-        this.template.exchange("http://localhost:8081/getOrderPosition", HttpMethod.GET, getRequest, String.class);
+    ResponseEntity<String> getResponse = this.template.exchange(this.SERVER_URL + this.port + GET_ORDER_POSITION,
+        HttpMethod.GET, getRequest, String.class);
     assertThat(getResponse).isNotNull();
 
-    byte[] encodedFileContent = null;
-    try {
-      encodedFileContent = Files.readAllBytes(Paths.get("src/test/resources/orderPositionPayload.json"));
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    String fileContent = new String(encodedFileContent, Charset.defaultCharset());
+    String fileContent = getJSONFromFile("src/test/resources/orderPositionPayload.json");
     assertThat(getResponse.getBody()).isEqualTo(fileContent);
   }
 
@@ -70,17 +69,10 @@ public class HttpGetRequestTests extends AbstractRestServiceTest {
     headers.add(HttpHeaders.ACCEPT, "application/json");
     headers.add(HttpHeaders.CONNECTION, "keep-alive");
     HttpEntity<String> getRequest = new HttpEntity<>(headers);
-    ResponseEntity<String> getResponse =
-        this.template.exchange("http://localhost:8081/getAllCustomerDates", HttpMethod.GET, getRequest, String.class);
+    ResponseEntity<String> getResponse = this.template.exchange(this.SERVER_URL + this.port + GET_ALL_CUSTOMER_DATA,
+        HttpMethod.GET, getRequest, String.class);
     assertThat(getResponse).isNotNull();
-
-    byte[] encodedFileContent = null;
-    try {
-      encodedFileContent = Files.readAllBytes(Paths.get("src/test/resources/customer.json"));
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
-    String fileContent = new String(encodedFileContent, Charset.defaultCharset());
+    String fileContent = getJSONFromFile("src/test/resources/customer.json");
     assertThat(getResponse.getBody()).isEqualTo(fileContent);
   }
 
