@@ -5,6 +5,8 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import javax.inject.Inject;
+
 import org.apache.commons.codec.binary.Base64;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,24 +32,25 @@ import io.oasp.gastronomy.restaurant.salesmanagement.service.impl.rest.Salesmana
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = { SpringBootApp.class, SalesmanagementRestTestConfiguration.class })
 @TestPropertySource(properties = { "flyway.locations=filesystem:src/test/resources/db/tablemanagement" })
-public class HttpGetRequest extends AbstractRestServiceTest {
+public class HttpGetRequestTests extends AbstractRestServiceTest {
 
   /**
    * @param args
    * @throws IOException
    */
 
-  @Test
-  public void httpGetRequestActionTest() {
+  @Inject
+  private RestTemplate template;
 
-    RestTemplate template = new RestTemplate();
+  @Test
+  public void getOrderPosition() {
 
     HttpHeaders headers = new HttpHeaders();// = getAuthentificatedHeaders();
     headers.add(HttpHeaders.ACCEPT, "application/json");
     headers.add(HttpHeaders.CONNECTION, "keep-alive");
     HttpEntity<String> getRequest = new HttpEntity<>(headers);
     ResponseEntity<String> getResponse =
-        template.exchange("http://localhost:8081/test", HttpMethod.GET, getRequest, String.class);
+        this.template.exchange("http://localhost:8081/getOrderPosition", HttpMethod.GET, getRequest, String.class);
     assertThat(getResponse).isNotNull();
 
     byte[] encodedFileContent = null;
@@ -58,7 +61,27 @@ public class HttpGetRequest extends AbstractRestServiceTest {
     }
     String fileContent = new String(encodedFileContent, Charset.defaultCharset());
     assertThat(getResponse.getBody()).isEqualTo(fileContent);
+  }
 
+  @Test
+  public void getAllCustomerDates() {
+
+    HttpHeaders headers = new HttpHeaders();// = getAuthentificatedHeaders();
+    headers.add(HttpHeaders.ACCEPT, "application/json");
+    headers.add(HttpHeaders.CONNECTION, "keep-alive");
+    HttpEntity<String> getRequest = new HttpEntity<>(headers);
+    ResponseEntity<String> getResponse =
+        this.template.exchange("http://localhost:8081/getAllCustomerDates", HttpMethod.GET, getRequest, String.class);
+    assertThat(getResponse).isNotNull();
+
+    byte[] encodedFileContent = null;
+    try {
+      encodedFileContent = Files.readAllBytes(Paths.get("src/test/resources/customer.json"));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    String fileContent = new String(encodedFileContent, Charset.defaultCharset());
+    assertThat(getResponse.getBody()).isEqualTo(fileContent);
   }
 
   private HttpHeaders getAuthentificatedHeaders() {
