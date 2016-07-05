@@ -7,24 +7,15 @@ import static citrus_server_mocking.ServerMockHelper.getJSONFromFile;
 
 import java.io.IOException;
 
-import javax.inject.Inject;
-
 import org.apache.commons.codec.binary.Base64;
+import org.assertj.core.api.Assertions;
 import org.json.JSONObject;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.test.context.TestPropertySource;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.web.client.RestTemplate;
-
-import io.oasp.gastronomy.restaurant.SpringBootApp;
-import io.oasp.gastronomy.restaurant.general.common.base.AbstractRestServiceTest;
-import io.oasp.gastronomy.restaurant.salesmanagement.service.impl.rest.SalesmanagementRestTestConfiguration;
 
 /**
  * TODO shuber This type ...
@@ -32,22 +23,18 @@ import io.oasp.gastronomy.restaurant.salesmanagement.service.impl.rest.Salesmana
  * @author shuber
  * @since dev
  */
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = { SpringBootApp.class, SalesmanagementRestTestConfiguration.class })
-@TestPropertySource(properties = { "flyway.locations=filesystem:src/test/resources/db/tablemanagement" })
-public class HttpGetRequestTests extends AbstractRestServiceTest {
+// @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class HttpGetRequestTests extends Assertions {
+
+  private RestTemplate template = new RestTemplate();
 
   /**
    * @param args
    * @throws IOException
    */
-
   private final int port = 8081;
 
   private final String SERVER_URL = "http://localhost:";
-
-  @Inject
-  private RestTemplate template;
 
   @Test
   public void getOrderPosition() {
@@ -65,7 +52,7 @@ public class HttpGetRequestTests extends AbstractRestServiceTest {
   public void getAllCustomerDates() {
 
     HttpEntity<String> getRequest = createGetRequest();
-    ResponseEntity<String> getResponse = this.template.exchange(this.SERVER_URL + this.port + GET_ALL_CUSTOMER_DATA,
+    ResponseEntity<String> getResponse = this.template.exchange(this.SERVER_URL + 8081 + GET_ALL_CUSTOMER_DATA,
         HttpMethod.GET, getRequest, String.class);
     assertThat(getResponse).isNotNull();
     String fileContent = getJSONFromFile("src/test/resources/customer.json");
@@ -76,9 +63,10 @@ public class HttpGetRequestTests extends AbstractRestServiceTest {
   public void getCustomerAddress() {
 
     HttpEntity<String> getRequest = createGetRequest();
-    ResponseEntity<String> getResponse = this.template.exchange(this.SERVER_URL + this.port + GET_CUSTOMER_ADDRESS,
-        HttpMethod.GET, getRequest, String.class);
+    ResponseEntity<String> getResponse =
+        this.template.exchange(this.SERVER_URL + 8081 + GET_CUSTOMER_ADDRESS, HttpMethod.GET, getRequest, String.class);
     assertThat(getResponse).isNotNull();
+    System.out.println(getResponse);
     String fileContent = getJSONFromFile("src/test/resources/customer.json");
     JSONObject jsonObj = new JSONObject(fileContent);
     JSONObject adress = jsonObj.getJSONObject("address");
