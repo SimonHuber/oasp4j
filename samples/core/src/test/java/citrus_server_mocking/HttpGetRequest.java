@@ -5,6 +5,7 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import org.apache.commons.codec.binary.Base64;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -41,10 +42,9 @@ public class HttpGetRequest extends AbstractRestServiceTest {
 
     RestTemplate template = new RestTemplate();
 
-    HttpHeaders headers = new HttpHeaders();
-    headers.add("Accept", "text/plain,application/json,application/*+json,*/*");
-    headers.add("Connection", "keep-alive");
-    headers.add("Content-Type", "text/plain;charset=ISO-8859-1");
+    HttpHeaders headers = new HttpHeaders();// = getAuthentificatedHeaders();
+    headers.add(HttpHeaders.ACCEPT, "application/json");
+    headers.add(HttpHeaders.CONNECTION, "keep-alive");
     HttpEntity<String> getRequest = new HttpEntity<>(headers);
     ResponseEntity<String> getResponse =
         template.exchange("http://localhost:8081/test", HttpMethod.GET, getRequest, String.class);
@@ -59,5 +59,17 @@ public class HttpGetRequest extends AbstractRestServiceTest {
     String fileContent = new String(encodedFileContent, Charset.defaultCharset());
     assertThat(getResponse.getBody()).isEqualTo(fileContent);
 
+  }
+
+  private HttpHeaders getAuthentificatedHeaders() {
+
+    String plainCreds = "waiter" + ":" + "waiter";
+    byte[] plainCredsBytes = plainCreds.getBytes();
+    byte[] base64CredsBytes = Base64.encodeBase64(plainCredsBytes);
+    String base64Creds = new String(base64CredsBytes);
+    HttpHeaders headers = new HttpHeaders();
+    headers.add("Authorization", "Basic " + base64Creds);
+
+    return headers;
   }
 }
