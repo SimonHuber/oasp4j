@@ -8,6 +8,7 @@ import static citrus_server_mocking.ServerMockHelper.getJSONFromFile;
 import org.json.JSONObject;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
+import org.testng.annotations.BeforeTest;
 
 import com.consol.citrus.annotations.CitrusResource;
 import com.consol.citrus.annotations.CitrusTest;
@@ -26,19 +27,23 @@ import com.consol.citrus.dsl.junit.JUnit4CitrusTest;
 // @TestPropertySource(properties = { "flyway.locations=filesystem:src/test/resources/db/tablemanagement" })
 public class ExampleServer extends JUnit4CitrusTest {
 
-  // @Test
-  // @CitrusTest
-  // public void purge(@CitrusResource TestDesigner designer) {
-  //
-  // designer.purgeEndpoints().endpointNames("helloHttpServer");
-  // }
+  @BeforeTest
+  public void purge(@CitrusResource TestDesigner designer) {
+
+    designer.purgeEndpoints().endpointNames("helloHttpServer");
+    designer.purgeEndpoints().endpointNames("helloHttpServer1");
+    designer.purgeEndpoints().endpointNames("helloHttpServer2");
+    designer.purgeEndpoints().endpointNames("helloHttpServer3");
+  }
 
   @Test
   @CitrusTest
   public void deliverOrderPosition(@CitrusResource TestDesigner designer) {
 
+    designer.echo("\n-----------------------------\ndeliverOrderPosition\nServer1\n");
     designer.http().server("helloHttpServer").get(GET_ORDER_POSITION).accept("application/json").timeout(600000000);
     String fileContent = getJSONFromFile("src/test/resources/orderPositionPayload.json");
+    designer.echo("\n-----------------------------\ndeliverOrderPosition\nServer2\n");
     designer.http().server("helloHttpServer").respond(HttpStatus.OK).payload(fileContent).version("HTTP/1.1")
         .contentType("application/json");
 
@@ -48,8 +53,11 @@ public class ExampleServer extends JUnit4CitrusTest {
   @CitrusTest
   public void deliverAllCustomerDates(@CitrusResource TestDesigner designer) {
 
+    designer.echo("\n-----------------------------\ndeliverAllCustomerDates\nServer1\n");
     designer.http().server("helloHttpServer").get(GET_ALL_CUSTOMER_DATA).accept("application/json").timeout(600000000);
+
     String fileContent = getJSONFromFile("src/test/resources/customer.json");
+    designer.echo("\n-----------------------------\ndeliverAllCustomerDates\nServer2\n");
     designer.http().server("helloHttpServer").respond(HttpStatus.OK).payload(fileContent).version("HTTP/1.1")
         .contentType("application/json");
   }
@@ -58,10 +66,12 @@ public class ExampleServer extends JUnit4CitrusTest {
   @CitrusTest
   public void deliverCustomerAddress(@CitrusResource TestDesigner designer) {
 
+    designer.echo("\n-----------------------------\ndeliverCustomerAddress\nServer1\n");
     designer.http().server("helloHttpServer").get(GET_CUSTOMER_ADDRESS).accept("application/json").timeout(600000000);
     String fileContent = getJSONFromFile("src/test/resources/customer.json");
     JSONObject jsonObj = new JSONObject(fileContent);
     JSONObject adress = jsonObj.getJSONObject("address");
+    designer.echo("\n-----------------------------\ndeliverCustomerAddress\nServer2\n");
     designer.http().server("helloHttpServer").respond(HttpStatus.OK).payload(adress.toString()).version("HTTP/1.1")
         .contentType("application/json");
   }
