@@ -38,13 +38,9 @@ public class ExampleServer extends JUnit4CitrusTest {
   @CitrusTest
   public void httpServerActionTest(@CitrusResource TestDesigner designer) {
 
-    designer.echo("\n\n111111111111111\n\n");
     designer.http().server("helloHttpServer").get("/test").contentType("text/plain;charset=ISO-8859-1")
         .accept("text/plain,application/json,application/*+json,*/*").timeout(600000000)
-        // .header("CustomHeaderId",
-        // "${custom_header_id}")
-        // .header("Authorization", "Basic c29tZVVzZXJuYW1lOnNvbWVQYXNzd29yZA==")
-        // .extractFromHeader("X-MessageId", "message_id");
+
     ;
     byte[] encodedFileContent = null;
     try {
@@ -54,7 +50,6 @@ public class ExampleServer extends JUnit4CitrusTest {
       e.printStackTrace();
     }
     String fileContent = new String(encodedFileContent, Charset.defaultCharset());
-    designer.echo("\n\n22222222222222222\n\n");
     designer.http().server("helloHttpServer").respond(HttpStatus.OK)
         // .payload(new ClassPathResource("orderPositionPayload.json")).version("HTTP/1.1")
         .payload(fileContent);
