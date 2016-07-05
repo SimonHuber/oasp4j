@@ -36,7 +36,7 @@ public class ExampleServer extends JUnit4CitrusTest {
   public void deliverOrderPosition(@CitrusResource TestDesigner designer) {
 
     designer.http().server("helloHttpServer").get(GET_ORDER_POSITION).accept("application/json").timeout(600000000);
-    String fileContent = getJSONFromFile("src/test/resources/customer.json");
+    String fileContent = getJSONFromFile("src/test/resources/orderPositionPayload.json");
     designer.http().server("helloHttpServer").respond(HttpStatus.OK).payload(fileContent).version("HTTP/1.1")
         .contentType("application/json");
 
