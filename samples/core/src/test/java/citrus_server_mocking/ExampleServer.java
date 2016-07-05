@@ -1,9 +1,11 @@
 package citrus_server_mocking;
 
 import static citrus_server_mocking.ServerMockHelper.GET_ALL_CUSTOMER_DATA;
+import static citrus_server_mocking.ServerMockHelper.GET_CUSTOMER_ADDRESS;
 import static citrus_server_mocking.ServerMockHelper.GET_ORDER_POSITION;
 import static citrus_server_mocking.ServerMockHelper.getJSONFromFile;
 
+import org.json.JSONObject;
 import org.junit.Test;
 import org.springframework.http.HttpStatus;
 
@@ -49,6 +51,18 @@ public class ExampleServer extends JUnit4CitrusTest {
     designer.http().server("helloHttpServer").get(GET_ALL_CUSTOMER_DATA).accept("application/json").timeout(600000000);
     String fileContent = getJSONFromFile("src/test/resources/customer.json");
     designer.http().server("helloHttpServer").respond(HttpStatus.OK).payload(fileContent).version("HTTP/1.1")
+        .contentType("application/json");
+  }
+
+  @Test
+  @CitrusTest
+  public void deliverCustomerAddress(@CitrusResource TestDesigner designer) {
+
+    designer.http().server("helloHttpServer").get(GET_CUSTOMER_ADDRESS).accept("application/json").timeout(600000000);
+    String fileContent = getJSONFromFile("src/test/resources/customer.json");
+    JSONObject jsonObj = new JSONObject(fileContent);
+    JSONObject adress = jsonObj.getJSONObject("address");
+    designer.http().server("helloHttpServer").respond(HttpStatus.OK).payload(adress.toString()).version("HTTP/1.1")
         .contentType("application/json");
   }
 }

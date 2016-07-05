@@ -16,6 +16,8 @@ public class ServerMockHelper {
 
   protected static final String GET_ALL_CUSTOMER_DATA = "/getAllCustomerDates";
 
+  protected static final String GET_CUSTOMER_ADDRESS = "/getCustomerAddress";
+
   protected static String getJSONFromFile(String fileName) {
 
     byte[] encodedFileContent = null;

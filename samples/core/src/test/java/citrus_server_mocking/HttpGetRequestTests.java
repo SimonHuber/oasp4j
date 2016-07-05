@@ -1,6 +1,7 @@
 package citrus_server_mocking;
 
 import static citrus_server_mocking.ServerMockHelper.GET_ALL_CUSTOMER_DATA;
+import static citrus_server_mocking.ServerMockHelper.GET_CUSTOMER_ADDRESS;
 import static citrus_server_mocking.ServerMockHelper.GET_ORDER_POSITION;
 import static citrus_server_mocking.ServerMockHelper.getJSONFromFile;
 
@@ -9,6 +10,7 @@ import java.io.IOException;
 import javax.inject.Inject;
 
 import org.apache.commons.codec.binary.Base64;
+import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
@@ -50,10 +52,7 @@ public class HttpGetRequestTests extends AbstractRestServiceTest {
   @Test
   public void getOrderPosition() {
 
-    HttpHeaders headers = new HttpHeaders();// = getAuthentificatedHeaders();
-    headers.add(HttpHeaders.ACCEPT, "application/json");
-    headers.add(HttpHeaders.CONNECTION, "keep-alive");
-    HttpEntity<String> getRequest = new HttpEntity<>(headers);
+    HttpEntity<String> getRequest = createGetRequest();
     ResponseEntity<String> getResponse = this.template.exchange(this.SERVER_URL + this.port + GET_ORDER_POSITION,
         HttpMethod.GET, getRequest, String.class);
     assertThat(getResponse).isNotNull();
@@ -65,15 +64,34 @@ public class HttpGetRequestTests extends AbstractRestServiceTest {
   @Test
   public void getAllCustomerDates() {
 
-    HttpHeaders headers = new HttpHeaders();// = getAuthentificatedHeaders();
-    headers.add(HttpHeaders.ACCEPT, "application/json");
-    headers.add(HttpHeaders.CONNECTION, "keep-alive");
-    HttpEntity<String> getRequest = new HttpEntity<>(headers);
+    HttpEntity<String> getRequest = createGetRequest();
     ResponseEntity<String> getResponse = this.template.exchange(this.SERVER_URL + this.port + GET_ALL_CUSTOMER_DATA,
         HttpMethod.GET, getRequest, String.class);
     assertThat(getResponse).isNotNull();
     String fileContent = getJSONFromFile("src/test/resources/customer.json");
     assertThat(getResponse.getBody()).isEqualTo(fileContent);
+  }
+
+  @Test
+  public void getCustomerAddress() {
+
+    HttpEntity<String> getRequest = createGetRequest();
+    ResponseEntity<String> getResponse = this.template.exchange(this.SERVER_URL + this.port + GET_CUSTOMER_ADDRESS,
+        HttpMethod.GET, getRequest, String.class);
+    assertThat(getResponse).isNotNull();
+    String fileContent = getJSONFromFile("src/test/resources/customer.json");
+    JSONObject jsonObj = new JSONObject(fileContent);
+    JSONObject adress = jsonObj.getJSONObject("address");
+    assertThat(getResponse.getBody()).isEqualTo(adress.toString());
+  }
+
+  private HttpEntity<String> createGetRequest() {
+
+    HttpHeaders headers = new HttpHeaders();
+    headers.add(HttpHeaders.ACCEPT, "application/json");
+    headers.add(HttpHeaders.CONNECTION, "keep-alive");
+    HttpEntity<String> getRequest = new HttpEntity<>(headers);
+    return getRequest;
   }
 
   private HttpHeaders getAuthentificatedHeaders() {
