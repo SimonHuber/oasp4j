@@ -25,18 +25,18 @@ import com.consol.citrus.dsl.junit.JUnit4CitrusTest;
 // @TestPropertySource(properties = { "flyway.locations=filesystem:src/test/resources/db/tablemanagement" })
 public class ExampleServer extends JUnit4CitrusTest {
 
+  // @Test
+  // @CitrusTest
+  // public void purge(@CitrusResource TestDesigner designer) {
+  //
+  // designer.purgeEndpoints().endpointNames("helloHttpServer");
+  // }
+
   @Test
   @CitrusTest
-  public void purge(@CitrusResource TestDesigner designer) {
+  public void deliverOrderPosition(@CitrusResource TestDesigner designer) {
 
-    designer.purgeEndpoints().endpointNames("helloHttpServer");
-  }
-
-  @Test
-  @CitrusTest
-  public void httpServerActionTest(@CitrusResource TestDesigner designer) {
-
-    designer.http().server("helloHttpServer").get("/test").accept("application/json").timeout(600000000);
+    designer.http().server("helloHttpServer").get("/getOrderPosition").accept("application/json").timeout(600000000);
     byte[] encodedFileContent = null;
     try {
       encodedFileContent = Files.readAllBytes(Paths.get("src/test/resources/orderPositionPayload.json"));
@@ -47,5 +47,21 @@ public class ExampleServer extends JUnit4CitrusTest {
     designer.http().server("helloHttpServer").respond(HttpStatus.OK).payload(fileContent).version("HTTP/1.1")
         .contentType("application/json");
 
+  }
+
+  @Test
+  @CitrusTest
+  public void deliverAllCustomerDates(@CitrusResource TestDesigner designer) {
+
+    designer.http().server("helloHttpServer").get("/getAllCustomerDates").accept("application/json").timeout(600000000);
+    byte[] encodedFileContent = null;
+    try {
+      encodedFileContent = Files.readAllBytes(Paths.get("src/test/resources/customer.json"));
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+    String fileContent = new String(encodedFileContent, Charset.defaultCharset());
+    designer.http().server("helloHttpServer").respond(HttpStatus.OK).payload(fileContent).version("HTTP/1.1")
+        .contentType("application/json");
   }
 }
