@@ -1,4 +1,4 @@
-package citrus_server_mocking;
+package citrusserver;
 
 import javax.inject.Inject;
 

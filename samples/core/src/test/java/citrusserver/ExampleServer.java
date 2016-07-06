@@ -1,10 +1,10 @@
-package citrus_server_mocking;
+package citrusserver;
 
-import static citrus_server_mocking.ServerMockHelper.GET_ALL_CUSTOMER_DATA;
-import static citrus_server_mocking.ServerMockHelper.GET_CUSTOMER_ADDRESS;
-import static citrus_server_mocking.ServerMockHelper.GET_ORDER_POSITION;
-import static citrus_server_mocking.ServerMockHelper.RESOURCE_PATH;
-import static citrus_server_mocking.ServerMockHelper.getJSONFromFile;
+import static citrusserver.ServerMockHelper.GET_ALL_CUSTOMER_DATA;
+import static citrusserver.ServerMockHelper.GET_CUSTOMER_ADDRESS;
+import static citrusserver.ServerMockHelper.GET_ORDER_POSITION;
+import static citrusserver.ServerMockHelper.RESOURCE_PATH;
+import static citrusserver.ServerMockHelper.getJSONFromFile;
 
 import org.json.JSONObject;
 import org.junit.Test;
