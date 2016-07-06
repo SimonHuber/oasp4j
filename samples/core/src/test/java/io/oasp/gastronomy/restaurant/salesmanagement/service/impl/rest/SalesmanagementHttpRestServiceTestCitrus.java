@@ -9,8 +9,10 @@ import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.context.TestPropertySource;
 
+import com.consol.citrus.annotations.CitrusResource;
 import com.consol.citrus.annotations.CitrusTest;
-import com.consol.citrus.dsl.junit.JUnit4CitrusTestDesigner;
+import com.consol.citrus.dsl.design.TestDesigner;
+import com.consol.citrus.dsl.junit.JUnit4CitrusTest;
 import com.consol.citrus.message.MessageType;
 
 import io.oasp.gastronomy.restaurant.SpringBootApp;
@@ -25,7 +27,7 @@ import io.oasp.gastronomy.restaurant.SpringBootApp;
 @SpringApplicationConfiguration(classes = { SpringBootApp.class, SalesmanagementRestTestConfiguration.class })
 @TestPropertySource(properties = { "flyway.locations=filesystem:src/test/resources/db/tablemanagement" })
 
-public class SalesmanagementHttpRestServiceTestCitrus extends JUnit4CitrusTestDesigner {
+public class SalesmanagementHttpRestServiceTestCitrus extends JUnit4CitrusTest {
 
   /**
    * The port of the web server during the test.
@@ -35,13 +37,24 @@ public class SalesmanagementHttpRestServiceTestCitrus extends JUnit4CitrusTestDe
 
   @Test
   @CitrusTest
-  public void getOrdePosition() {
+  public void getOrdePosition(@CitrusResource TestDesigner designer) {
 
-    send("salesmanagementClient").http().method(HttpMethod.GET).header("Authorization", getAuthentificatedHeaders())
-        .endpoint("http://localhost:" + this.port + "/services/rest/salesmanagement/v1/orderposition/1");
-    receive("salesmanagementClient")
-        .endpoint("http://localhost:" + this.port + "/services/rest/salesmanagement/v1/orderposition/1")
-        .messageType(MessageType.JSON).http().status(HttpStatus.OK).validate("$.id", 1).validate("$.orderId", 1);
+    designer.send("salesmanagementClient").http().method(HttpMethod.GET)
+        .header("Authorization", getAuthentificatedHeaders()).endpoint(generateBaseUrl() + "orderposition/1");
+    designer.receive("salesmanagementClient").endpoint(generateBaseUrl() + "orderposition/1")
+        .messageType(MessageType.JSON).http().status(HttpStatus.OK).validate("$.id", 1).validate("$.orderId", 1)
+        .ignore("$.offerId");
+  }
+
+  @Test
+  @CitrusTest
+  public void getOrdePositions(@CitrusResource TestDesigner designer) {
+
+    designer.send("salesmanagementClient").http().method(HttpMethod.GET)
+        .header("Authorization", getAuthentificatedHeaders()).endpoint(generateBaseUrl() + "orderposition/");
+    designer.receive("salesmanagementClient").endpoint(generateBaseUrl() + "orderposition/")
+        .messageType(MessageType.JSON).http().status(HttpStatus.OK).validate("$.id", 1).validate("$.orderId", 1)
+        .ignore("$.offerId");
   }
 
   /**
@@ -56,4 +69,10 @@ public class SalesmanagementHttpRestServiceTestCitrus extends JUnit4CitrusTestDe
 
     return "Basic " + base64Creds;
   }
+
+  private String generateBaseUrl() {
+
+    return "http://localhost:" + this.port + "/services/rest/salesmanagement/v1/";
+  }
+
 }
