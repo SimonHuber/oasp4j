@@ -3,6 +3,7 @@ package citrusserver;
 import static citrusserver.ServerMockHelper.GET_ALL_CUSTOMER_DATA;
 import static citrusserver.ServerMockHelper.GET_CUSTOMER_ADDRESS;
 import static citrusserver.ServerMockHelper.GET_ORDER_POSITION;
+import static citrusserver.ServerMockHelper.GET_ORDER_POSITIONS;
 import static citrusserver.ServerMockHelper.RESOURCE_PATH;
 import static citrusserver.ServerMockHelper.getJSONFromFile;
 
@@ -47,6 +48,18 @@ public class HttpGetRequestTests extends Assertions {
         template.exchange(SERVER_URL + port + GET_ORDER_POSITION, HttpMethod.GET, getRequest, String.class);
     assertThat(getResponse).isNotNull();
     String fileContent = getJSONFromFile(RESOURCE_PATH + "orderPositionPayload.json");
+    assertThat(fileContent).isNotNull();
+    assertThat(getResponse.getBody()).isEqualTo(fileContent);
+  }
+
+  @Test
+  public void getOrderPositions() {
+
+    HttpEntity<String> getRequest = createGetRequest();
+    ResponseEntity<String> getResponse =
+        template.exchange(SERVER_URL + port + GET_ORDER_POSITIONS, HttpMethod.GET, getRequest, String.class);
+    assertThat(getResponse).isNotNull();
+    String fileContent = getJSONFromFile(RESOURCE_PATH + "orderPositionsPayload.json");
     assertThat(fileContent).isNotNull();
     assertThat(getResponse.getBody()).isEqualTo(fileContent);
   }

@@ -12,11 +12,13 @@ import java.nio.file.Paths;
  * @since dev
  */
 public class ServerMockHelper {
-  protected static final String GET_ORDER_POSITION = "/getOrderPosition";
+  protected static final String GET_ORDER_POSITION = "/orderposition";
 
-  protected static final String GET_ALL_CUSTOMER_DATA = "/getAllCustomerDates";
+  protected static final String GET_ORDER_POSITIONS = "/orderpositions";
 
-  protected static final String GET_CUSTOMER_ADDRESS = "/getCustomerAddress";
+  protected static final String GET_ALL_CUSTOMER_DATA = "/allcustomerdates";
+
+  protected static final String GET_CUSTOMER_ADDRESS = "/customeraddress";
 
   protected static final String ROLE = "waiter";
 

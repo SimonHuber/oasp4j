@@ -3,6 +3,7 @@ package citrusserver;
 import static citrusserver.ServerMockHelper.GET_ALL_CUSTOMER_DATA;
 import static citrusserver.ServerMockHelper.GET_CUSTOMER_ADDRESS;
 import static citrusserver.ServerMockHelper.GET_ORDER_POSITION;
+import static citrusserver.ServerMockHelper.GET_ORDER_POSITIONS;
 import static citrusserver.ServerMockHelper.RESOURCE_PATH;
 import static citrusserver.ServerMockHelper.getJSONFromFile;
 
@@ -47,6 +48,17 @@ public class ExampleServer extends JUnit4CitrusTest {
 
   @Test
   @CitrusTest
+  public void deliverOrderPositions(@CitrusResource TestDesigner designer) {
+
+    designer.http().server("helloHttpServer").get(GET_ORDER_POSITIONS).accept("application/json").timeout(TIME_OUT);
+    String fileContent = getJSONFromFile("src/test/resources/orderPositionsPayload.json");
+    designer.http().server("helloHttpServer").respond(HttpStatus.OK).payload(fileContent).version("HTTP/1.1")
+        .contentType("application/json");
+
+  }
+
+  @Test
+  @CitrusTest
   public void deliverAllCustomerDates(@CitrusResource TestDesigner designer) {
 
     designer.http().server("helloHttpServer").get(GET_ALL_CUSTOMER_DATA).accept("application/json").timeout(TIME_OUT);
@@ -66,4 +78,5 @@ public class ExampleServer extends JUnit4CitrusTest {
     designer.http().server("helloHttpServer").respond(HttpStatus.OK).payload(address.toString()).version("HTTP/1.1")
         .contentType("application/json");
   }
+
 }
