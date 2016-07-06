@@ -18,6 +18,10 @@ public class ServerMockHelper {
 
   protected static final String GET_CUSTOMER_ADDRESS = "/getCustomerAddress";
 
+  protected static final String ROLE = "waiter";
+
+  protected static final String RESOURCE_PATH = "src/test/resources/";
+
   protected static String getJSONFromFile(String fileName) {
 
     byte[] encodedFileContent = null;

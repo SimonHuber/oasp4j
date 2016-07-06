@@ -21,38 +21,13 @@
     <citrus:file path="classpath:global-variable.properties"/>
   </citrus:global-variables>
 
-<!--   <citrus-http:client id="httpClient" request-url="http://localhost:8080/hello" request-method="GET" -->
-<!--     content-type="application/xml" timeout="60000"/> -->
-
-<!--   <citrus-http:client id="salesmanagementClient" request-url="http://localhost:8081/oasp4j-sample-server/services/rest/salesmanagement/v1/" request-method="GET" -->
-<!--     content-type="application/json" timeout="60000"/> -->
-
-<!--      <citrus-http:client id="salesmanagementClient" request-url="http://localhost:8081/oasp4j-sample-server/services/rest/salesmanagement/v1/" request-method="GET" -->
-<!--     content-type="application/json" timeout="60000"/> -->
-
-<!--          <citrus-http:client id="salesmanagementClient" request-url="http://localhost:8090/services/rest/salesmanagement/v1/" request-method="GET" -->
-<!--     content-type="application/json" timeout="60000"/> -->
+<citrus-http:client id="helloHttpClient" request-url="http://localhost:8081/test" request-method="GET"
+  timeout="60000"/>
 
 
-<citrus-http:client id="helloHttpClient"
-          request-url="http://localhost:8081/test"
-          request-method="GET"
-          timeout="60000"/>
 
-<citrus-websocket:server id="helloHttpServer"
+<citrus-http:server id="helloHttpServer"
                 port="8081"
                 auto-start="true"
                 resource-base="src/it/resources"/>
-
-                <citrus-http:server id="helloHttpServer2"
-                port="8082"
-                auto-start="true"
-                resource-base="src/it/resources"/>
-
-                <citrus-http:server id="helloHttpServer3"
-                port="8083"
-                auto-start="true"
-                resource-base="src/it/resources"/>
-
-
 </beans>

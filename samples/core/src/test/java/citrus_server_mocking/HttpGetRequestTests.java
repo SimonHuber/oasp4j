@@ -3,14 +3,16 @@ package citrus_server_mocking;
 import static citrus_server_mocking.ServerMockHelper.GET_ALL_CUSTOMER_DATA;
 import static citrus_server_mocking.ServerMockHelper.GET_CUSTOMER_ADDRESS;
 import static citrus_server_mocking.ServerMockHelper.GET_ORDER_POSITION;
+import static citrus_server_mocking.ServerMockHelper.RESOURCE_PATH;
 import static citrus_server_mocking.ServerMockHelper.getJSONFromFile;
 
 import java.io.IOException;
 
-import org.apache.commons.codec.binary.Base64;
 import org.assertj.core.api.Assertions;
 import org.json.JSONObject;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -23,28 +25,29 @@ import org.springframework.web.client.RestTemplate;
  * @author shuber
  * @since dev
  */
-// @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class HttpGetRequestTests extends Assertions {
-
-  private RestTemplate template = new RestTemplate();
 
   /**
    * @param args
    * @throws IOException
    */
-  private final int port = 8081;
 
-  private final String SERVER_URL = "http://localhost:";
+  private static RestTemplate template = new RestTemplate();
+
+  private static final int port = 8081;
+
+  private static final String SERVER_URL = "http://localhost:";
 
   @Test
   public void getOrderPosition() {
 
     HttpEntity<String> getRequest = createGetRequest();
-    ResponseEntity<String> getResponse = this.template.exchange(this.SERVER_URL + this.port + GET_ORDER_POSITION,
-        HttpMethod.GET, getRequest, String.class);
+    ResponseEntity<String> getResponse =
+        template.exchange(SERVER_URL + port + GET_ORDER_POSITION, HttpMethod.GET, getRequest, String.class);
     assertThat(getResponse).isNotNull();
-
-    String fileContent = getJSONFromFile("src/test/resources/orderPositionPayload.json");
+    String fileContent = getJSONFromFile(RESOURCE_PATH + "orderPositionPayload.json");
+    assertThat(fileContent).isNotNull();
     assertThat(getResponse.getBody()).isEqualTo(fileContent);
   }
 
@@ -52,10 +55,10 @@ public class HttpGetRequestTests extends Assertions {
   public void getAllCustomerDates() {
 
     HttpEntity<String> getRequest = createGetRequest();
-    ResponseEntity<String> getResponse = this.template.exchange(this.SERVER_URL + 8081 + GET_ALL_CUSTOMER_DATA,
-        HttpMethod.GET, getRequest, String.class);
+    ResponseEntity<String> getResponse =
+        template.exchange(SERVER_URL + port + GET_ALL_CUSTOMER_DATA, HttpMethod.GET, getRequest, String.class);
     assertThat(getResponse).isNotNull();
-    String fileContent = getJSONFromFile("src/test/resources/customer.json");
+    String fileContent = getJSONFromFile(RESOURCE_PATH + "customer.json");
     assertThat(getResponse.getBody()).isEqualTo(fileContent);
   }
 
@@ -64,33 +67,19 @@ public class HttpGetRequestTests extends Assertions {
 
     HttpEntity<String> getRequest = createGetRequest();
     ResponseEntity<String> getResponse =
-        this.template.exchange(this.SERVER_URL + 8081 + GET_CUSTOMER_ADDRESS, HttpMethod.GET, getRequest, String.class);
+        template.exchange(SERVER_URL + port + GET_CUSTOMER_ADDRESS, HttpMethod.GET, getRequest, String.class);
     assertThat(getResponse).isNotNull();
-    System.out.println(getResponse);
-    String fileContent = getJSONFromFile("src/test/resources/customer.json");
-    JSONObject jsonObj = new JSONObject(fileContent);
-    JSONObject adress = jsonObj.getJSONObject("address");
-    assertThat(getResponse.getBody()).isEqualTo(adress.toString());
+    String fileContent = getJSONFromFile(RESOURCE_PATH + "customer.json");
+    JSONObject jsonObject = new JSONObject(fileContent);
+    JSONObject address = jsonObject.getJSONObject("address");
+    assertThat(getResponse.getBody()).isEqualTo(address.toString());
   }
 
   private HttpEntity<String> createGetRequest() {
 
     HttpHeaders headers = new HttpHeaders();
     headers.add(HttpHeaders.ACCEPT, "application/json");
-    headers.add(HttpHeaders.CONNECTION, "keep-alive");
     HttpEntity<String> getRequest = new HttpEntity<>(headers);
     return getRequest;
-  }
-
-  private HttpHeaders getAuthentificatedHeaders() {
-
-    String plainCreds = "waiter" + ":" + "waiter";
-    byte[] plainCredsBytes = plainCreds.getBytes();
-    byte[] base64CredsBytes = Base64.encodeBase64(plainCredsBytes);
-    String base64Creds = new String(base64CredsBytes);
-    HttpHeaders headers = new HttpHeaders();
-    headers.add("Authorization", "Basic " + base64Creds);
-
-    return headers;
   }
 }
