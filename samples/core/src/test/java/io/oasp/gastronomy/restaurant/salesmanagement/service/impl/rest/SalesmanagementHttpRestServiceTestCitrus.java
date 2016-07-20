@@ -37,7 +37,7 @@ public class SalesmanagementHttpRestServiceTestCitrus extends JUnit4CitrusTest {
 
   @Test
   @CitrusTest
-  public void getOrdePosition(@CitrusResource TestDesigner designer) {
+  public void getOrderPosition(@CitrusResource TestDesigner designer) {
 
     designer.send("salesmanagementClient").http().method(HttpMethod.GET)
         .header("Authorization", getAuthentificatedHeaders()).endpoint(generateBaseUrl() + "orderposition/1");
@@ -48,13 +48,15 @@ public class SalesmanagementHttpRestServiceTestCitrus extends JUnit4CitrusTest {
 
   @Test
   @CitrusTest
-  public void getOrdePositions(@CitrusResource TestDesigner designer) {
+  public void getOrders(@CitrusResource TestDesigner designer) {
 
     designer.send("salesmanagementClient").http().method(HttpMethod.GET)
-        .header("Authorization", getAuthentificatedHeaders()).endpoint(generateBaseUrl() + "orderposition/");
-    designer.receive("salesmanagementClient").endpoint(generateBaseUrl() + "orderposition/")
-        .messageType(MessageType.JSON).http().status(HttpStatus.OK).validate("$.id", 1).validate("$.orderId", 1)
-        .ignore("$.offerId");
+        .header("Authorization", getAuthentificatedHeaders()).endpoint(generateBaseUrl() + "order/");
+    designer.receive("salesmanagementClient").endpoint(generateBaseUrl() + "order/").messageType(MessageType.JSON)
+        .http().status(HttpStatus.OK)
+
+        .validate("$.result[*].order.keySet()", "[modificationCounter, tableId, id, state, revision]")
+        .validate("$.result[*].size()", "2").validate("$.result[*].size()", "2");
   }
 
   /**

@@ -12,21 +12,14 @@
        http://www.citrusframework.org/schema/jms/config http://www.citrusframework.org/schema/jms/config/citrus-jms-config.xsd
        http://www.citrusframework.org/schema/http/config http://www.citrusframework.org/schema/http/config/citrus-http-config.xsd
  http://www.citrusframework.org/schema/http/testcase
-        http://www.citrusframework.org/schema/http/testcase/citrus-http-testcase.xsd
-        http://www.citrusframework.org/schema/websocket/config
-            http://www.citrusframework.org/schema/websocket/config/citrus-websocket-config.xsd">
+        http://www.citrusframework.org/schema/http/testcase/citrus-http-testcase.xsd">
   <citrus:schema-repository id="schemaRepository"/>
 
   <citrus:global-variables>
     <citrus:file path="classpath:global-variable.properties"/>
   </citrus:global-variables>
 
-<citrus-http:client id="helloHttpClient" request-url="http://localhost:8081/test" request-method="GET"
-  timeout="60000"/>
-
-
-
-<citrus-http:server id="helloHttpServer"
+<citrus-http:server id="sampleHttpServer"
                 port="8081"
                 auto-start="true"
                 resource-base="src/it/resources"/>

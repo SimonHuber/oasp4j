@@ -109,8 +109,11 @@ public class SalesmanagementHttpRestServiceTest extends AbstractRestServiceTest 
     HttpEntity<String> getRequest = new HttpEntity<>(this.AUTHENTIFICATED_HEADERS);
 
     // when
-    ResponseEntity<String> getResponse = this.template.exchange(
-        generateBaseUrl() + "order/" + responseOrderCto.getOrder().getId(), HttpMethod.GET, getRequest, String.class);
+    ResponseEntity<String> getResponse =
+        this.template.exchange(generateBaseUrl() + "order/", HttpMethod.GET, getRequest, String.class);
+
+    System.out.println(
+        "\n-----------------------------------\n" + getResponse.getBody() + "\n-----------------------------------\n");
 
     // then
     assertThat(getResponse).isNotNull();
@@ -263,6 +266,7 @@ public class SalesmanagementHttpRestServiceTest extends AbstractRestServiceTest 
 
     // then
     assertThat(getResponse).isNotNull();
+    // System.out.println("\n-------------------\n" + getResponse.getBody() + "\n-------------------\n");
 
     JSONArray responseOrderPositions = new JSONArray(getResponse.getBody());
     assertThat(responseOrderPositions).isNotNull();

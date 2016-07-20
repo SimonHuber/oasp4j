@@ -21,7 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 /**
- * TODO shuber This type ...
+ * This class verifies the HTTP-request reponses send to a server mocked by citrus.
  *
  * @author shuber
  * @since dev
