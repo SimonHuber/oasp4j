@@ -102,7 +102,7 @@ public class SalesmanagementHttpRestServiceTest extends AbstractRestServiceTest 
   public void getOrder() {
 
     // given
-    OrderCto sampleOrderCto = this.helper.createSampleOrderCto(SAMPLE_TABLE_ID);
+    OrderCto sampleOrderCto = this.helper.createSampleOrderCto();
     OrderCto responseOrderCto = this.service.saveOrder(sampleOrderCto);
     assertThat(responseOrderCto).isNotNull();
 
@@ -193,7 +193,7 @@ public class SalesmanagementHttpRestServiceTest extends AbstractRestServiceTest 
   public void getOrderPosition() {
 
     // given
-    OrderCto sampleOrderCto = this.helper.createSampleOrderCto(SAMPLE_TABLE_ID);
+    OrderCto sampleOrderCto = this.helper.createSampleOrderCto();
     OrderCto responseOrderCto = this.service.saveOrder(sampleOrderCto);
     assertThat(responseOrderCto).isNotNull();
 
@@ -237,7 +237,7 @@ public class SalesmanagementHttpRestServiceTest extends AbstractRestServiceTest 
   public void getAllOrderPositions() {
 
     // given
-    OrderCto sampleOrderCto = this.helper.createSampleOrderCto(SAMPLE_TABLE_ID);
+    OrderCto sampleOrderCto = this.helper.createSampleOrderCto();
     OrderCto responseOrderCto = this.service.saveOrder(sampleOrderCto);
     assertThat(responseOrderCto).isNotNull();
 
@@ -305,7 +305,7 @@ public class SalesmanagementHttpRestServiceTest extends AbstractRestServiceTest 
   public void postOrderPosition() {
 
     // given
-    OrderCto sampleOrderCto = this.helper.createSampleOrderCto(SAMPLE_TABLE_ID);
+    OrderCto sampleOrderCto = this.helper.createSampleOrderCto();
     OrderCto responseOrderCto = this.service.saveOrder(sampleOrderCto);
     assertThat(responseOrderCto).isNotNull();
 

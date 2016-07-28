@@ -56,7 +56,7 @@ public class SalesmanagementRestServiceTestHelper {
    * @param tableId
    * @return {@link OrderCto}
    */
-  protected OrderCto createSampleOrderCto(long tableId) {
+  protected OrderCto createSampleOrderCto() {
 
     OrderCto sampleOrderCto = new OrderCto();
     OrderEto sampleOrderEto = new OrderEto();
