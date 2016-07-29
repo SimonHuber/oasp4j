@@ -17,6 +17,8 @@ import io.oasp.gastronomy.restaurant.general.common.TestUtil;
 import io.oasp.gastronomy.restaurant.general.common.api.constants.PermissionConstants;
 import io.oasp.gastronomy.restaurant.general.common.base.AbstractRestServiceTest;
 import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.Salesmanagement;
+import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.BillCto;
+import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.BillEto;
 import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.OrderCto;
 import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.OrderEto;
 import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.OrderPositionEto;
@@ -42,6 +44,7 @@ public class SalesmanagementAuthorisationNegativeTests extends AbstractRestServi
 
     getDbTestHelper().resetDatabase();
     // TODO fragen ob es nicht sinnvoll wäre auch einen Login für Testzwecke ohne Berechtigung zu speichern
+    // TODO PermissionConstants.DELETE_ORDER, PermissionConstants.DELETE_ORDER_POSITION
     TestUtil.login("chief", PermissionConstants.DELETE_ORDER);
   }
 
@@ -55,7 +58,6 @@ public class SalesmanagementAuthorisationNegativeTests extends AbstractRestServi
   public void saveOrder() {
 
     OrderCto responseOrderCto = this.salesmanagement.saveOrder(SampleToCreator.createSampleOrderCto());
-    assertThat(responseOrderCto).isNotNull();
   }
 
   @Test(expected = AccessDeniedException.class)
@@ -81,19 +83,19 @@ public class SalesmanagementAuthorisationNegativeTests extends AbstractRestServi
   @Test(expected = AccessDeniedException.class)
   public void saveBill() {
 
-    this.salesmanagement.createBill(SampleToCreator.createSampleBillEto());
+    BillEto sampleBillEto = this.salesmanagement.createBill(SampleToCreator.createSampleBillEto());
   }
 
   @Test(expected = AccessDeniedException.class)
   public void findBill() {
 
-    this.salesmanagement.findBill(SampleToCreator.SAMPLE_BILL_ID);
+    BillCto sampleBillCto = this.salesmanagement.findBill(SampleToCreator.SAMPLE_BILL_ID);
   }
 
   @Test(expected = AccessDeniedException.class)
-  public void findBill() {
+  public void deleteBill() {
 
-    this.salesmanagement.findBill(SampleToCreator.SAMPLE_BILL_ID);
+    this.salesmanagement.deleteBill(SampleToCreator.SAMPLE_BILL_ID);
   }
 
 }

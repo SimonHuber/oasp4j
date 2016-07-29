@@ -100,7 +100,7 @@ public class SampleToCreator {
   public static final OrderPositionEto createSampleOrderPositionEto(long orderId) {
 
     OrderPositionEto sampleOrderPositionEto = new OrderPositionEtoBuilder().orderId(orderId).offerId(SAMPLE_OFFER_ID)
-        .offerName(SAMPLE_OFFER_NAME).price(SAMPLE_OFFER_PRICE).comment(SAMPLE_ORDER_COMMENT).createNew();
+        .comment(SAMPLE_ORDER_COMMENT).createNew();
     return sampleOrderPositionEto;
   }
 
