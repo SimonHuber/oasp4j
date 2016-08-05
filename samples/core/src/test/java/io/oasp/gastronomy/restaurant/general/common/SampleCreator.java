@@ -32,15 +32,17 @@ public class SampleCreator {
   // offermanagement
 
   // TODO macht die Benamung Sinn?
-  public static final long SAMPLE_OFFER_ID = 1;
+  public static final long SAMPLE_OFFER_ID = 1L;
 
   public static final String SAMPLE_OFFER_NAME = "Schnitzel-Menü";
 
+  public static final String SAMPLE_OFFER_DESCRIPTION = "Description of Schnitzel-Menü";
+
   public static final long SAMPLE_OFFER_MEAL_ID = 1;
 
-  public static final long SAMPLE_OFFER_DRINK_ID = 12;
+  public static final long SAMPLE_OFFER_SIDEDISH_ID = 7;
 
-  public static final double NEW_OFFER_PRICE = 7.19;
+  public static final long SAMPLE_OFFER_DRINK_ID = 12;
 
   public static final String NEW_OFFER_NAME = "Reisschnitzel-Menü";
 
@@ -49,6 +51,8 @@ public class SampleCreator {
   public static final long NEW_OFFER_MEAL_ID = 1;
 
   public static final long NEW_OFFER_SIDEDISH_ID = 8;
+
+  public static final double NEW_OFFER_PRICE = 7.19;
 
   public static final int NUMBER_OF_MEALS = 6;
 
