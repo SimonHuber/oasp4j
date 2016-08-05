@@ -1,10 +1,10 @@
 package io.oasp.gastronomy.restaurant.offermanagement.dataaccess.impl.dao;
 
+import javax.inject.Named;
+
 import io.oasp.gastronomy.restaurant.general.dataaccess.base.dao.ApplicationMasterDataDaoImpl;
 import io.oasp.gastronomy.restaurant.offermanagement.dataaccess.api.DrinkEntity;
 import io.oasp.gastronomy.restaurant.offermanagement.dataaccess.api.dao.DrinkDao;
-
-import javax.inject.Named;
 
 /**
  * Implementation of {@link DrinkDao}.

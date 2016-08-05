@@ -11,7 +11,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import io.oasp.gastronomy.restaurant.SpringBootApp;
-import io.oasp.gastronomy.restaurant.general.common.SampleToCreator;
+import io.oasp.gastronomy.restaurant.general.common.SampleCreator;
 import io.oasp.gastronomy.restaurant.general.common.TestUtil;
 import io.oasp.gastronomy.restaurant.general.common.api.constants.PermissionConstants;
 import io.oasp.gastronomy.restaurant.general.common.base.AbstractRestServiceTest;
@@ -58,14 +58,14 @@ public class SalesmanagementAuthorisationPositiveTests extends AbstractRestServi
   @Test
   public void saveOrder() {
 
-    OrderCto responseOrderCto = this.salesmanagement.saveOrder(SampleToCreator.createSampleOrderCto());
+    OrderCto responseOrderCto = this.salesmanagement.saveOrder(SampleCreator.createSampleOrderCto());
     assertThat(responseOrderCto).isNotNull();
   }
 
   @Test
   public void findOrder() {
 
-    OrderEto responseOrderEto = this.salesmanagement.findOrder(SampleToCreator.SAMPLE_ORDER_ID);
+    OrderEto responseOrderEto = this.salesmanagement.findOrder(SampleCreator.SAMPLE_ORDER_ID);
     assertThat(responseOrderEto).isNotNull();
   }
 
@@ -75,7 +75,7 @@ public class SalesmanagementAuthorisationPositiveTests extends AbstractRestServi
   public void saveOrderPosition() {
 
     OrderPositionEto responseOrderPositionEto =
-        this.salesmanagement.saveOrderPosition(SampleToCreator.createSampleOrderPositionEto());
+        this.salesmanagement.saveOrderPosition(SampleCreator.createSampleOrderPositionEto());
     assertThat(responseOrderPositionEto).isNotNull();
   }
 
@@ -83,21 +83,21 @@ public class SalesmanagementAuthorisationPositiveTests extends AbstractRestServi
   public void findOrderPosition() {
 
     OrderPositionEto responseOrderPositionEto =
-        this.salesmanagement.findOrderPosition(SampleToCreator.SAMPLE_ORDERPOSITION_ID);
+        this.salesmanagement.findOrderPosition(SampleCreator.SAMPLE_ORDERPOSITION_ID);
     assertThat(responseOrderPositionEto).isNotNull();
   }
 
   @Test
   public void saveBill() {
 
-    BillEto sampleBillEto = this.salesmanagement.createBill(SampleToCreator.createSampleBillEto());
+    BillEto sampleBillEto = this.salesmanagement.createBill(SampleCreator.createSampleBillEto());
     assertThat(sampleBillEto).isNotNull();
   }
 
   @Test
   public void findBill() {
 
-    BillCto sampleBillCto = this.salesmanagement.findBill(SampleToCreator.SAMPLE_BILL_ID);
+    BillCto sampleBillCto = this.salesmanagement.findBill(SampleCreator.SAMPLE_BILL_ID);
     assertThat(sampleBillCto).isNotNull();
   }
 
@@ -106,7 +106,7 @@ public class SalesmanagementAuthorisationPositiveTests extends AbstractRestServi
 
     Throwable thrown = null;
     try {
-      this.salesmanagement.deleteBill(SampleToCreator.SAMPLE_BILL_ID);
+      this.salesmanagement.deleteBill(SampleCreator.SAMPLE_BILL_ID);
     } catch (Throwable t) {
       thrown = t;
     }

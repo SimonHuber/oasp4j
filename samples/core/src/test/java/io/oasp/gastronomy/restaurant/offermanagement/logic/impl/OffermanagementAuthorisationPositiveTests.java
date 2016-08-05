@@ -12,13 +12,11 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import io.oasp.gastronomy.restaurant.SpringBootApp;
-import io.oasp.gastronomy.restaurant.common.builders.MealEtoBuilder;
-import io.oasp.gastronomy.restaurant.general.common.SampleToCreator;
+import io.oasp.gastronomy.restaurant.general.common.SampleCreator;
 import io.oasp.gastronomy.restaurant.general.common.TestUtil;
 import io.oasp.gastronomy.restaurant.general.common.api.constants.PermissionConstants;
 import io.oasp.gastronomy.restaurant.general.common.base.AbstractRestServiceTest;
 import io.oasp.gastronomy.restaurant.offermanagement.logic.api.Offermanagement;
-import io.oasp.gastronomy.restaurant.offermanagement.logic.api.to.MealEto;
 import io.oasp.gastronomy.restaurant.offermanagement.logic.api.to.OfferEto;
 import io.oasp.gastronomy.restaurant.offermanagement.logic.api.to.ProductEto;
 
@@ -58,42 +56,41 @@ public class OffermanagementAuthorisationPositiveTests extends AbstractRestServi
   @Test
   public void findOffer() {
 
-    OfferEto responseOfferEto = this.offermanagement.findOffer(SampleToCreator.SAMPLE_OFFER_ID);
+    OfferEto responseOfferEto = this.offermanagement.findOffer(SampleCreator.SAMPLE_OFFER_ID);
     assertThat(responseOfferEto).isNotNull();
   }
 
   @Test
   public void saveOffer() {
 
-    OfferEto responseOfferEto = this.offermanagement.saveOffer(SampleToCreator.createSampleOfferEto());
+    OfferEto responseOfferEto = this.offermanagement.saveOffer(SampleCreator.createSampleOfferEto());
     assertThat(responseOfferEto).isNotNull();
   }
 
   @Test
   public void deleteOffer() {
 
-    this.offermanagement.deleteOffer(SampleToCreator.SAMPLE_OFFER_ID);
+    this.offermanagement.deleteOffer(SampleCreator.SAMPLE_OFFER_ID);
   }
 
   @Test
   public void findProduct() {
 
-    ProductEto responseProductEto = this.offermanagement.findProduct(SampleToCreator.SAMPLE_OFFER_MEAL_ID);
+    ProductEto responseProductEto = this.offermanagement.findProduct(SampleCreator.SAMPLE_OFFER_MEAL_ID);
     assertThat(responseProductEto).isNotNull();
   }
 
   @Test
   public void saveProduct() {
 
-    MealEto sampleMealEto = new MealEtoBuilder().createNew();
-    ProductEto responseProductEto = this.offermanagement.saveProduct(SampleToCreator.createSampleMealEto());
+    ProductEto responseProductEto = this.offermanagement.saveProduct(SampleCreator.createSampleMealEto());
     assertThat(responseProductEto).isNotNull();
   }
 
   @Test(expected = DataIntegrityViolationException.class)
   public void deleteProduct() {
 
-    this.offermanagement.deleteProduct(SampleToCreator.SAMPLE_OFFER_MEAL_ID);
+    this.offermanagement.deleteProduct(SampleCreator.SAMPLE_OFFER_MEAL_ID);
   }
 
   // TODO Jörg fragen, ob man überhaupt auf Picture Testen soll, weil nix in der Datenbank steht
