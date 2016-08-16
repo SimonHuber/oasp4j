@@ -20,16 +20,16 @@ public class OrderPositionEtoBuilder {
   }
 
   /**
-   * Might be enrichted to users needs (will not be overwritten)
+   * Fills all mandatory fields by default. (will be overwritten on re-generation)
    */
-  private void fillMandatoryFields_custom() {
+  private void fillMandatoryFields() {
 
   }
 
   /**
-   * Fills all mandatory fields by default. (will be overwritten on re-generation)
+   * Might be enrichted to users needs (will not be overwritten)
    */
-  private void fillMandatoryFields() {
+  private void fillMandatoryFields_custom() {
 
   }
 

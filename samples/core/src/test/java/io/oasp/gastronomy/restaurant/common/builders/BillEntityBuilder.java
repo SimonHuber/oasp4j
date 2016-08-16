@@ -18,20 +18,6 @@ public class BillEntityBuilder {
     fillMandatoryFields_custom();
   }
 
-  /**
-   * Might be enrichted to users needs (will not be overwritten)
-   */
-  private void fillMandatoryFields_custom() {
-
-  }
-
-  /**
-   * Fills all mandatory fields by default. (will be overwritten on re-generation)
-   */
-  private void fillMandatoryFields() {
-
-  }
-
   public BillEntityBuilder orderPositions(final List<OrderPositionEntity> orderPositions) {
 
     parameterToBeApplied.add(new P<BillEntity>() {
@@ -111,6 +97,20 @@ public class BillEntityBuilder {
       parameter.apply(billentity);
     }
     return billentity;
+  }
+
+  /**
+   * Might be enrichted to users needs (will not be overwritten)
+   */
+  private void fillMandatoryFields_custom() {
+
+  }
+
+  /**
+   * Fills all mandatory fields by default. (will be overwritten on re-generation)
+   */
+  private void fillMandatoryFields() {
+
   }
 
 }

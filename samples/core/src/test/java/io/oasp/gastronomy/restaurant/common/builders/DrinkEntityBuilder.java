@@ -23,6 +23,13 @@ public class DrinkEntityBuilder {
 
   }
 
+  /**
+   * Fills all mandatory fields by default. (will be overwritten on re-generation)
+   */
+  private void fillMandatoryFields() {
+
+  }
+
   public DrinkEntityBuilder alcoholic(final boolean alcoholic) {
 
     parameterToBeApplied.add(new P<DrinkEntity>() {
@@ -90,13 +97,6 @@ public class DrinkEntityBuilder {
       parameter.apply(drinkentity);
     }
     return drinkentity;
-  }
-
-  /**
-   * Fills all mandatory fields by default. (will be overwritten on re-generation)
-   */
-  private void fillMandatoryFields() {
-
   }
 
 }
