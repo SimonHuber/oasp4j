@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.dao.DataIntegrityViolationException;
-import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import io.oasp.gastronomy.restaurant.SpringBootApp;
@@ -28,7 +27,6 @@ import io.oasp.gastronomy.restaurant.offermanagement.logic.api.to.ProductEto;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = { SpringBootApp.class })
-@TestPropertySource(properties = { "flyway.locations=filesystem:src/test/resources/db/tablemanagement" })
 
 // TODO is not clean to inherit from AbstractRestServiceTest
 public class OffermanagementAuthorisationPositiveTests extends AbstractRestServiceTest {
@@ -93,12 +91,5 @@ public class OffermanagementAuthorisationPositiveTests extends AbstractRestServi
     this.offermanagement.deleteProduct(SampleCreator.SAMPLE_OFFER_MEAL_ID);
   }
 
-  // TODO Jörg fragen, ob man überhaupt auf Picture Testen soll, weil nix in der Datenbank steht
-  @Test
-  public void findProductPicture() {
-
-    // BinaryObjectEto responseProductPictureEto = this.offermanagement.findProductPicture(1L);
-    // assertThat(responseProductPictureEto).isNotNull();
-  }
-
+  // TODO write that productpicture is left out
 }

@@ -1,4 +1,4 @@
-package io.oasp.gastronomy.restaurant.staffmanagement.logic.impl;
+package io.oasp.gastronomy.restaurant.tablemanagement.logic.impl;
 
 import javax.inject.Inject;
 
@@ -15,8 +15,8 @@ import io.oasp.gastronomy.restaurant.common.test.SampleCreator;
 import io.oasp.gastronomy.restaurant.general.common.TestUtil;
 import io.oasp.gastronomy.restaurant.general.common.api.constants.PermissionConstants;
 import io.oasp.gastronomy.restaurant.general.common.base.AbstractRestServiceTest;
-import io.oasp.gastronomy.restaurant.staffmanagement.logic.api.Staffmanagement;
-import io.oasp.gastronomy.restaurant.staffmanagement.logic.api.to.StaffMemberEto;
+import io.oasp.gastronomy.restaurant.tablemanagement.logic.api.Tablemanagement;
+import io.oasp.gastronomy.restaurant.tablemanagement.logic.api.to.TableEto;
 
 /**
  * TODO shuber This type ...
@@ -28,10 +28,10 @@ import io.oasp.gastronomy.restaurant.staffmanagement.logic.api.to.StaffMemberEto
 @SpringApplicationConfiguration(classes = { SpringBootApp.class })
 
 // TODO is not clean to inherit from AbstractRestServiceTest
-public class StaffmanagementAuthorisationNegativeTests extends AbstractRestServiceTest {
+public class TablemanagementAuthorisationNegativeTests extends AbstractRestServiceTest {
 
   @Inject
-  private Staffmanagement staffmanagement;
+  private Tablemanagement tablemanagement;
 
   @Before
   public void setup() {
@@ -45,28 +45,27 @@ public class StaffmanagementAuthorisationNegativeTests extends AbstractRestServi
   @After
   public void teardown() {
 
-    this.staffmanagement = null;
+    this.tablemanagement = null;
   }
 
   @Test(expected = AccessDeniedException.class)
-  public void findStaffMember() {
+  public void findTable() {
 
-    StaffMemberEto responseStaffMemberEto = this.staffmanagement.findStaffMember(SampleCreator.SAMPLE_STAFF_MEMBER_ID);
-    assertThat(responseStaffMemberEto).isNotNull();
+    TableEto responseTableEto = this.tablemanagement.findTable(SampleCreator.SAMPLE_TABLE_ID);
+    assertThat(responseTableEto).isNotNull();
   }
 
   @Test(expected = AccessDeniedException.class)
-  public void saveStaffMember() {
+  public void saveTable() {
 
-    StaffMemberEto responseStaffMemberEto =
-        this.staffmanagement.saveStaffMember(SampleCreator.createSampleStaffMemberEto());
-    assertThat(responseStaffMemberEto).isNotNull();
+    TableEto responseTableEto = this.tablemanagement.saveTable(SampleCreator.createSampleTableEto());
+    assertThat(responseTableEto).isNotNull();
   }
 
   @Test(expected = AccessDeniedException.class)
-  public void deleteStaffMember() {
+  public void deleteTable() {
 
-    this.staffmanagement.deleteStaffMember(SampleCreator.SAMPLE_STAFF_MEMBER_ID);
+    this.tablemanagement.deleteTable(SampleCreator.SAMPLE_TABLE_ID);
   }
 
 }

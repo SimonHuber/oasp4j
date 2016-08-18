@@ -1,4 +1,4 @@
-package io.oasp.gastronomy.restaurant.staffmanagement.logic.impl;
+package io.oasp.gastronomy.restaurant.tablemanagement.logic.impl;
 
 import javax.inject.Inject;
 
@@ -7,7 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.SpringApplicationConfiguration;
-import org.springframework.security.access.AccessDeniedException;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import io.oasp.gastronomy.restaurant.SpringBootApp;
@@ -15,8 +14,8 @@ import io.oasp.gastronomy.restaurant.common.test.SampleCreator;
 import io.oasp.gastronomy.restaurant.general.common.TestUtil;
 import io.oasp.gastronomy.restaurant.general.common.api.constants.PermissionConstants;
 import io.oasp.gastronomy.restaurant.general.common.base.AbstractRestServiceTest;
-import io.oasp.gastronomy.restaurant.staffmanagement.logic.api.Staffmanagement;
-import io.oasp.gastronomy.restaurant.staffmanagement.logic.api.to.StaffMemberEto;
+import io.oasp.gastronomy.restaurant.tablemanagement.logic.api.Tablemanagement;
+import io.oasp.gastronomy.restaurant.tablemanagement.logic.api.to.TableEto;
 
 /**
  * TODO shuber This type ...
@@ -28,10 +27,10 @@ import io.oasp.gastronomy.restaurant.staffmanagement.logic.api.to.StaffMemberEto
 @SpringApplicationConfiguration(classes = { SpringBootApp.class })
 
 // TODO is not clean to inherit from AbstractRestServiceTest
-public class StaffmanagementAuthorisationNegativeTests extends AbstractRestServiceTest {
+public class TablemanagementAuthorisationPositveTests extends AbstractRestServiceTest {
 
   @Inject
-  private Staffmanagement staffmanagement;
+  private Tablemanagement tablemanagement;
 
   @Before
   public void setup() {
@@ -39,34 +38,33 @@ public class StaffmanagementAuthorisationNegativeTests extends AbstractRestServi
     getDbTestHelper().resetDatabase();
     // TODO fragen ob es nicht sinnvoll wäre auch einen Login für Testzwecke ohne Berechtigung zu speichern
     // TODO PermissionConstants.DELETE_ORDER, PermissionConstants.DELETE_ORDER_POSITION
-    TestUtil.login("chief", PermissionConstants.DELETE_ORDER);
+    TestUtil.login("chief", PermissionConstants.FIND_TABLE, PermissionConstants.SAVE_TABLE,
+        PermissionConstants.FIND_STAFF_MEMBER, PermissionConstants.DELETE_TABLE);
   }
 
   @After
   public void teardown() {
 
-    this.staffmanagement = null;
+    this.tablemanagement = null;
   }
 
-  @Test(expected = AccessDeniedException.class)
-  public void findStaffMember() {
+  @Test
+  public void findTable() {
 
-    StaffMemberEto responseStaffMemberEto = this.staffmanagement.findStaffMember(SampleCreator.SAMPLE_STAFF_MEMBER_ID);
-    assertThat(responseStaffMemberEto).isNotNull();
+    TableEto responseTableEto = this.tablemanagement.findTable(SampleCreator.SAMPLE_TABLE_ID);
+    assertThat(responseTableEto).isNotNull();
   }
 
-  @Test(expected = AccessDeniedException.class)
-  public void saveStaffMember() {
+  @Test
+  public void saveTable() {
 
-    StaffMemberEto responseStaffMemberEto =
-        this.staffmanagement.saveStaffMember(SampleCreator.createSampleStaffMemberEto());
-    assertThat(responseStaffMemberEto).isNotNull();
+    TableEto responseTableEto = this.tablemanagement.saveTable(SampleCreator.createSampleTableEto());
+    assertThat(responseTableEto).isNotNull();
   }
 
-  @Test(expected = AccessDeniedException.class)
-  public void deleteStaffMember() {
+  @Test
+  public void deleteTable() {
 
-    this.staffmanagement.deleteStaffMember(SampleCreator.SAMPLE_STAFF_MEMBER_ID);
+    this.tablemanagement.deleteTable(SampleCreator.SAMPLE_TABLE_ID);
   }
-
 }

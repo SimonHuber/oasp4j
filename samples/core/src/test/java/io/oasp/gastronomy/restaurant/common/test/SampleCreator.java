@@ -1,23 +1,32 @@
-package io.oasp.gastronomy.restaurant.general.common;
+package io.oasp.gastronomy.restaurant.common.test;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import io.oasp.gastronomy.restaurant.common.builders.BillEntityBuilder;
+import io.oasp.gastronomy.restaurant.common.builders.BillEtoBuilder;
 import io.oasp.gastronomy.restaurant.common.builders.DrinkEntityBuilder;
+import io.oasp.gastronomy.restaurant.common.builders.MealEtoBuilder;
+import io.oasp.gastronomy.restaurant.common.builders.OfferEtoBuilder;
 import io.oasp.gastronomy.restaurant.common.builders.OrderCtoBuilder;
 import io.oasp.gastronomy.restaurant.common.builders.OrderEtoBuilder;
 import io.oasp.gastronomy.restaurant.common.builders.OrderPositionEtoBuilder;
+import io.oasp.gastronomy.restaurant.common.builders.StaffMemberEtoBuilder;
 import io.oasp.gastronomy.restaurant.common.builders.TableEtoBuilder;
 import io.oasp.gastronomy.restaurant.general.common.api.datatype.Money;
+import io.oasp.gastronomy.restaurant.general.common.api.datatype.Role;
 import io.oasp.gastronomy.restaurant.offermanagement.dataaccess.api.DrinkEntity;
+import io.oasp.gastronomy.restaurant.offermanagement.logic.api.to.MealEto;
+import io.oasp.gastronomy.restaurant.offermanagement.logic.api.to.OfferEto;
 import io.oasp.gastronomy.restaurant.salesmanagement.common.api.datatype.OrderPositionState;
 import io.oasp.gastronomy.restaurant.salesmanagement.common.api.datatype.OrderState;
 import io.oasp.gastronomy.restaurant.salesmanagement.common.api.datatype.ProductOrderState;
 import io.oasp.gastronomy.restaurant.salesmanagement.dataaccess.api.BillEntity;
+import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.BillEto;
 import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.OrderCto;
 import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.OrderEto;
 import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.OrderPositionEto;
+import io.oasp.gastronomy.restaurant.staffmanagement.logic.api.to.StaffMemberEto;
 import io.oasp.gastronomy.restaurant.tablemanagement.logic.api.to.TableEto;
 
 /**
@@ -29,19 +38,32 @@ import io.oasp.gastronomy.restaurant.tablemanagement.logic.api.to.TableEto;
 public class SampleCreator {
 
   // offermanagement
-  public static final long SAMPLE_OFFER_ID = 1L;
+  public static final long SAMPLE_OFFER_ID = 1;
 
   public static final String SAMPLE_OFFER_NAME = "Schnitzel-Menü";
 
+  public static final String NEW_OFFER_NAME = "Reis-Schnitzel";
+
   public static final String SAMPLE_OFFER_DESCRIPTION = "Description of Schnitzel-Menü";
+
+  public static final String NEW_OFFER_DESCRIPTION = "Description of Reis-Schnitzel";
+
+  public static final long SAMPLE_OFFER_MEAL_ID = 1;
 
   public static final long SAMPLE_OFFER_SIDEDISH_ID = 7;
 
   public static final long SAMPLE_OFFER_DRINK_ID = 12;
 
+  public static final double NEW_OFFER_PRICE = 7.29;
+
+  public static final Money NEW_OFFER_PRICE_AS_MONEY =
+      new Money(new BigDecimal(Double.toString(SampleCreator.NEW_OFFER_PRICE)));
+
   public static final int NUMBER_OF_MEALS = 6;
 
-  public static final long SAMPLE_MEAL_ID = 1;
+  public static final String NEW_MEAL_NAME = "Schweinsbraten";
+
+  public static final String NEW_MEAL_DESCRIPTION = "Description of Schweinsbraten";
 
   public static final String SAMPLE_MEAL_DESCRIPTION = "Schnitzel";
 
@@ -54,6 +76,8 @@ public class SampleCreator {
   public static final String NEW_DRINK_NAME = "Spring Paradise";
 
   public static final String NEW_DRINK_DESCRIPTION = "without alcohol";
+
+  public static final int SAMPLE_BILL_ID = 1;
 
   // salesmanagement
   public static final long SAMPLE_ORDER_ID = 1;
@@ -92,7 +116,40 @@ public class SampleCreator {
 
   // staffmanagement
 
+  public static final long SAMPLE_STAFF_MEMBER_ID = 0;
+
+  public static final long SAMPLE_STAFF_MEMBER_LOGIN = 0;
+
+  public static final String NEW_STAFF_MEMBER_FIRST_NAME = "Manfred";
+
+  public static final String NEW_STAFF_MEMBER_LAST_NAME = "Mustermann";
+
+  public static final Role NEW_STAFF_MEMBER_ROLE = Role.WAITER;
+
   // offermanagement
+  /**
+   * Creates a sample instance of type {@link OfferEto}.
+   *
+   * @return {@link OfferEto}.
+   */
+  public static final OfferEto createSampleOfferEto() {
+
+    OfferEto sampleOfferEto = new OfferEtoBuilder().name(NEW_OFFER_NAME).description(NEW_OFFER_DESCRIPTION)
+        .mealId(SAMPLE_OFFER_MEAL_ID).sideDishId(SAMPLE_OFFER_SIDEDISH_ID).price(NEW_OFFER_PRICE_AS_MONEY).createNew();
+    return sampleOfferEto;
+  }
+
+  /**
+   * Creates a sample instance of type {@link DrinkEntity}.
+   *
+   * @return {@link DrinkEntity}.
+   */
+  public static final MealEto createSampleMealEto() {
+
+    MealEto sampleMealEto = new MealEtoBuilder().name(NEW_MEAL_NAME).description(NEW_MEAL_DESCRIPTION).createNew();
+    return sampleMealEto;
+  }
+
   /**
    * Creates a sample instance of type {@link DrinkEntity}.
    *
@@ -168,6 +225,20 @@ public class SampleCreator {
     return sampleBillEntity;
   }
 
+  /**
+   * Creates a sample instance of type {@link BillEto}.
+   *
+   * @return {@link BillEto}.
+   */
+  public static final BillEto createSampleBillEto() {
+
+    ArrayList sampeOrderPositionIdList = new ArrayList<Long>();
+    sampeOrderPositionIdList.add(SAMPLE_ORDERPOSITION_ID);
+    BillEto sampleBillEto = new BillEtoBuilder().orderPositionIds(sampeOrderPositionIdList).total(new Money(NEW_TOTAL))
+        .tip(new Money(NEW_TIP)).payed(NEW_PAYED_FLAG).createNew();
+    return sampleBillEto;
+  }
+
   // tablemanagement
   /**
    * Creates a sample instance of type {@link TableEto}.
@@ -178,6 +249,19 @@ public class SampleCreator {
 
     TableEto sampleTableEto = new TableEtoBuilder().number(NEW_TABLE_NUMBER).waiterId(SAMPLE_WAITER_ID).createNew();
     return sampleTableEto;
+  }
+
+  // staffmanagement
+  /**
+   * Creates a sample instance of type {@link TableEto}.
+   *
+   * @return {@link TableEto}
+   */
+  public static final StaffMemberEto createSampleStaffMemberEto() {
+
+    StaffMemberEto sampleStaffMemberEto = new StaffMemberEtoBuilder().firstName(NEW_STAFF_MEMBER_FIRST_NAME)
+        .lastName(NEW_STAFF_MEMBER_LAST_NAME).role(NEW_STAFF_MEMBER_ROLE).createNew();
+    return sampleStaffMemberEto;
   }
 
 }
