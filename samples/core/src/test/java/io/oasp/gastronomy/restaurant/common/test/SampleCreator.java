@@ -1,68 +1,49 @@
 package io.oasp.gastronomy.restaurant.general.common;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import io.oasp.gastronomy.restaurant.common.builders.BillEntityBuilder;
-import io.oasp.gastronomy.restaurant.common.builders.BillEtoBuilder;
 import io.oasp.gastronomy.restaurant.common.builders.DrinkEntityBuilder;
-import io.oasp.gastronomy.restaurant.common.builders.MealEtoBuilder;
-import io.oasp.gastronomy.restaurant.common.builders.OfferEtoBuilder;
 import io.oasp.gastronomy.restaurant.common.builders.OrderCtoBuilder;
 import io.oasp.gastronomy.restaurant.common.builders.OrderEtoBuilder;
 import io.oasp.gastronomy.restaurant.common.builders.OrderPositionEtoBuilder;
+import io.oasp.gastronomy.restaurant.common.builders.TableEtoBuilder;
 import io.oasp.gastronomy.restaurant.general.common.api.datatype.Money;
 import io.oasp.gastronomy.restaurant.offermanagement.dataaccess.api.DrinkEntity;
-import io.oasp.gastronomy.restaurant.offermanagement.logic.api.to.MealEto;
-import io.oasp.gastronomy.restaurant.offermanagement.logic.api.to.OfferEto;
+import io.oasp.gastronomy.restaurant.salesmanagement.common.api.datatype.OrderPositionState;
+import io.oasp.gastronomy.restaurant.salesmanagement.common.api.datatype.OrderState;
+import io.oasp.gastronomy.restaurant.salesmanagement.common.api.datatype.ProductOrderState;
 import io.oasp.gastronomy.restaurant.salesmanagement.dataaccess.api.BillEntity;
-import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.BillEto;
 import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.OrderCto;
 import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.OrderEto;
 import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.OrderPositionEto;
+import io.oasp.gastronomy.restaurant.tablemanagement.logic.api.to.TableEto;
 
 /**
- * TODO shuber This type ...
+ * This class creates sample instances with sample attributes used for testing.
  *
  * @author shuber
- * @since dev
  */
 
 public class SampleCreator {
 
   // offermanagement
-
-  // TODO macht die Benamung Sinn?
   public static final long SAMPLE_OFFER_ID = 1L;
 
   public static final String SAMPLE_OFFER_NAME = "Schnitzel-Menü";
 
   public static final String SAMPLE_OFFER_DESCRIPTION = "Description of Schnitzel-Menü";
 
-  public static final long SAMPLE_OFFER_MEAL_ID = 1;
-
   public static final long SAMPLE_OFFER_SIDEDISH_ID = 7;
 
   public static final long SAMPLE_OFFER_DRINK_ID = 12;
-
-  public static final String NEW_OFFER_NAME = "Reisschnitzel-Menü";
-
-  public static final String NEW_OFFER_DESCRIPTION = "Reisschnitzel-Menü";
-
-  public static final long NEW_OFFER_MEAL_ID = 1;
-
-  public static final long NEW_OFFER_SIDEDISH_ID = 8;
-
-  public static final double NEW_OFFER_PRICE = 7.19;
 
   public static final int NUMBER_OF_MEALS = 6;
 
   public static final long SAMPLE_MEAL_ID = 1;
 
   public static final String SAMPLE_MEAL_DESCRIPTION = "Schnitzel";
-
-  public static final String NEW_MEAL_NAME = "Steak";
-
-  public static final String NEW_MEAL_DESCRIPTION = "Description of Steak";
 
   public static final int NUMBER_OF_SIDEDISHES = 4;
 
@@ -77,13 +58,24 @@ public class SampleCreator {
   // salesmanagement
   public static final long SAMPLE_ORDER_ID = 1;
 
+  public static final int NUMBER_OF_NEW_ORDERS = 2;
+
+  public static final OrderState SAMPLE_ORDER_STATE = OrderState.OPEN;
+
   public static final long SAMPLE_ORDERPOSITION_ID = 1;
 
   public static final double SAMPLE_ORDERPOSITION_PRICE = 6.99;
 
-  public static final String NEW_ORDER_COMMENT = "mit Ketchup";
+  public static final Money SAMPLE_ORDERPOSITION_PRICE_AS_MONEY =
+      new Money(new BigDecimal(Double.toString(SampleCreator.SAMPLE_ORDERPOSITION_PRICE)));
 
-  public static final long SAMPLE_BILL_ID = 1;
+  public static final OrderPositionState SAMPLE_ORDER_POSITION_STATE = OrderPositionState.ORDERED;
+
+  public static final int NUMBER_OF_NEW_ORDER_POSITIONS = 2;
+
+  public static final ProductOrderState SAMPLE_DRINK_STATE = ProductOrderState.DELIVERED;
+
+  public static final String NEW_ORDER_COMMENT = "mit Ketchup";
 
   public static final double NEW_TOTAL = 42.42;
 
@@ -91,58 +83,82 @@ public class SampleCreator {
 
   public static final boolean NEW_PAYED_FLAG = true;
 
-  public static final long SAMPLE_TABLE_ID = 101;
+  // tablemanagement
+  public static final long SAMPLE_TABLE_ID = 102;
+
+  public static final long NEW_TABLE_NUMBER = 7;
+
+  public static final long SAMPLE_WAITER_ID = 2;
+
+  // staffmanagement
 
   // offermanagement
-  public static final OfferEto createSampleOfferEto() {
+  /**
+   * Creates a sample instance of type {@link DrinkEntity}.
+   *
+   * @return {@link DrinkEntity}.
+   */
+  public static final DrinkEntity createSampleDrinkEntity() {
 
-    OfferEto sampleOfferEto = new OfferEtoBuilder().price(new Money(NEW_OFFER_PRICE)).mealId(NEW_OFFER_MEAL_ID)
-        .sideDishId(NEW_OFFER_SIDEDISH_ID).name(NEW_OFFER_NAME).description(NEW_OFFER_DESCRIPTION).createNew();
-    return sampleOfferEto;
-  }
-
-  public static final MealEto createSampleMealEto() {
-
-    MealEto sampleMealEto = new MealEtoBuilder().name(NEW_MEAL_NAME).description(NEW_MEAL_DESCRIPTION).createNew();
-    return sampleMealEto;
+    DrinkEntity sampleDrinkEntity = new DrinkEntityBuilder().alcoholic(NEW_ALCOHOLIC_FLAG)
+        .description(NEW_DRINK_DESCRIPTION).name(NEW_DRINK_NAME).createNew();
+    return sampleDrinkEntity;
   }
 
   // salesmanagement
+  /**
+   * Creates a sample instance of type {@link OrderEto}.
+   *
+   * @return {@link OrderEto}.
+   */
   public static final OrderEto createSampleOrderEto() {
 
     OrderEto sampleOrderEto = new OrderEtoBuilder().tableId(SAMPLE_TABLE_ID).createNew();
     return sampleOrderEto;
   }
 
+  /**
+   * Creates a sample instance of type {@link OrderCto}.
+   *
+   * @return {@link OrderCto}.
+   */
   public static final OrderCto createSampleOrderCto() {
 
     OrderCto sampleOrderCto = new OrderCtoBuilder().order(createSampleOrderEto()).createNew();
     return sampleOrderCto;
   }
 
+  /**
+   * Creates a sample instance of type {@link OrderPositionEto}.
+   *
+   * @return {@link OrderPositionEto}
+   */
   public static final OrderPositionEto createSampleOrderPositionEto() {
 
     OrderPositionEto sampleOrderPositionEto = createSampleOrderPositionEto(SAMPLE_ORDER_ID);
     return sampleOrderPositionEto;
   }
 
+  /**
+   * Creates a sample instance of type {@link OrderPositionEto}.
+   *
+   * @param orderId: id of order it belongs to
+   *
+   * @return {@link OrderPositionEto}
+   */
   public static final OrderPositionEto createSampleOrderPositionEto(long orderId) {
 
-    OrderPositionEto sampleOrderPositionEto =
-        new OrderPositionEtoBuilder().orderId(orderId).offerId(SAMPLE_OFFER_ID).comment(NEW_ORDER_COMMENT)
-            .offerName(SAMPLE_OFFER_NAME).price(new Money(SAMPLE_ORDERPOSITION_PRICE)).createNew();
+    OrderPositionEto sampleOrderPositionEto = new OrderPositionEtoBuilder().orderId(orderId).offerId(SAMPLE_OFFER_ID)
+        .comment(NEW_ORDER_COMMENT).offerName(SAMPLE_OFFER_NAME).drinkState(SAMPLE_DRINK_STATE)
+        .price(SAMPLE_ORDERPOSITION_PRICE_AS_MONEY).createNew();
     return sampleOrderPositionEto;
   }
 
-  public static final BillEto createSampleBillEto() {
-
-    ArrayList samlpeOrderPositionIdList = new ArrayList<Long>();
-    samlpeOrderPositionIdList.add(SAMPLE_ORDERPOSITION_ID);
-    BillEto sampleBillEto = new BillEtoBuilder().orderPositionIds(samlpeOrderPositionIdList).total(new Money(NEW_TOTAL))
-        .tip(new Money(NEW_TIP)).payed(NEW_PAYED_FLAG).createNew();
-    return sampleBillEto;
-  }
-
+  /**
+   * Creates a sample instance of type {@link BillEntity}.
+   *
+   * @return {@link BillEntity}
+   */
   public static final BillEntity createSampleBillEntity() {
 
     ArrayList sampeOrderPositionIdList = new ArrayList<Long>();
@@ -152,11 +168,16 @@ public class SampleCreator {
     return sampleBillEntity;
   }
 
-  public static final DrinkEntity createSampleDrinkEntity() {
+  // tablemanagement
+  /**
+   * Creates a sample instance of type {@link TableEto}.
+   *
+   * @return {@link TableEto}
+   */
+  public static final TableEto createSampleTableEto() {
 
-    DrinkEntity sampleDrinkEntity = new DrinkEntityBuilder().alcoholic(NEW_ALCOHOLIC_FLAG)
-        .description(NEW_DRINK_DESCRIPTION).name(NEW_DRINK_NAME).createNew();
-    return sampleDrinkEntity;
+    TableEto sampleTableEto = new TableEtoBuilder().number(NEW_TABLE_NUMBER).waiterId(SAMPLE_WAITER_ID).createNew();
+    return sampleTableEto;
   }
 
 }

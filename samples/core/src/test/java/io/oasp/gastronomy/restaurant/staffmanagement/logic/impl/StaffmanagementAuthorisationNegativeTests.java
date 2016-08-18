@@ -1,4 +1,4 @@
-package io.oasp.gastronomy.restaurant.salesmanagement.logic.impl;
+package io.oasp.gastronomy.restaurant.staffmanagement.logic.impl;
 
 import javax.inject.Inject;
 
@@ -12,16 +12,16 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import io.oasp.gastronomy.restaurant.SpringBootApp;
-import io.oasp.gastronomy.restaurant.common.test.SampleCreator;
+import io.oasp.gastronomy.restaurant.general.common.SampleCreator;
 import io.oasp.gastronomy.restaurant.general.common.TestUtil;
 import io.oasp.gastronomy.restaurant.general.common.api.constants.PermissionConstants;
 import io.oasp.gastronomy.restaurant.general.common.base.AbstractRestServiceTest;
-import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.Salesmanagement;
 import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.BillCto;
 import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.BillEto;
 import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.OrderCto;
 import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.OrderEto;
 import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.OrderPositionEto;
+import io.oasp.gastronomy.restaurant.staffmanagement.logic.api.Staffmanagement;
 
 /**
  * TODO shuber This type ...
@@ -34,10 +34,10 @@ import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.OrderPositionE
 @TestPropertySource(properties = { "flyway.locations=filesystem:src/test/resources/db/tablemanagement" })
 
 // TODO is not clean to inherit from AbstractRestServiceTest
-public class SalesmanagementAuthorisationNegativeTests extends AbstractRestServiceTest {
+public class StaffmanagementAuthorisationNegativeTests extends AbstractRestServiceTest {
 
   @Inject
-  private Salesmanagement salesmanagement;
+  private Staffmanagement staffmanagement;
 
   @Before
   public void setup() {
@@ -46,56 +46,17 @@ public class SalesmanagementAuthorisationNegativeTests extends AbstractRestServi
     // TODO fragen ob es nicht sinnvoll wäre auch einen Login für Testzwecke ohne Berechtigung zu speichern
     // TODO PermissionConstants.DELETE_ORDER, PermissionConstants.DELETE_ORDER_POSITION
     TestUtil.login("chief", PermissionConstants.DELETE_ORDER);
-  }
 
   @After
   public void teardown() {
 
-    this.salesmanagement = null;
+    this.staffmanagement = null;
   }
 
   @Test(expected = AccessDeniedException.class)
   public void saveOrder() {
 
-    OrderCto responseOrderCto = this.salesmanagement.saveOrder(SampleCreator.createSampleOrderCto());
-  }
-
-  @Test(expected = AccessDeniedException.class)
-  public void findOrder() {
-
-    OrderEto responseOrderEto = this.salesmanagement.findOrder(SampleCreator.SAMPLE_ORDER_ID);
-  }
-
-  @Test(expected = AccessDeniedException.class)
-  public void saveOrderPosition() {
-
-    OrderPositionEto responseOrderPositionEto =
-        this.salesmanagement.saveOrderPosition(SampleCreator.createSampleOrderPositionEto());
-  }
-
-  @Test(expected = AccessDeniedException.class)
-  public void findOrderPosition() {
-
-    OrderPositionEto responseOrderPositionEto =
-        this.salesmanagement.findOrderPosition(SampleCreator.SAMPLE_ORDERPOSITION_ID);
-  }
-
-  @Test(expected = AccessDeniedException.class)
-  public void saveBill() {
-
-    BillEto sampleBillEto = this.salesmanagement.createBill(SampleCreator.createSampleBillEto());
-  }
-
-  @Test(expected = AccessDeniedException.class)
-  public void findBill() {
-
-    BillCto sampleBillCto = this.salesmanagement.findBill(SampleCreator.SAMPLE_BILL_ID);
-  }
-
-  @Test(expected = AccessDeniedException.class)
-  public void deleteBill() {
-
-    this.salesmanagement.deleteBill(SampleCreator.SAMPLE_BILL_ID);
+    OrderCto responseOrderCto = this.staffmanagement.findStaffMember(id));
   }
 
 }
