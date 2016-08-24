@@ -54,6 +54,7 @@ public class TablemanagementRestServiceTest extends AbstractRestServiceTest {
 
   }
 
+  // TODO evenutally needs to be updated due to sample value creation
   /**
    * This test method serves as an example of how to use {@link AbstractRestServiceTest} in practice.
    */
@@ -66,11 +67,56 @@ public class TablemanagementRestServiceTest extends AbstractRestServiceTest {
     // when
 
     TableEto table = this.service.getTable(id);
+    assertThat(table).isNotNull();
 
     // then
+    assertThat(table.getId()).isEqualTo(id);
+  }
+
+  // TODO evenutally needs to be updated due to sample value creation
+  /**
+   * This test method tests whether the modificationCounter is updated correctly.
+   */
+  @Test
+  public void testUnchangedTableModificationCounter() {
+
+    // given
+    long id = 102;
+    TableEto table = this.service.getTable(id);
     assertThat(table).isNotNull();
     assertThat(table.getId()).isEqualTo(id);
 
+    int initialModificationCounter = table.getModificationCounter();
+
+    // when
+    table = this.service.saveTable(table);
+    assertThat(table).isNotNull();
+
+    // then
+    assertThat(table.getModificationCounter()).isEqualTo(initialModificationCounter);
+  }
+
+  /**
+   * This test method tests whether the modificationCounter is updated correctly.
+   */
+  @Test
+  public void testChangedTableModificationCounter() {
+
+    // given
+    long id = 102;
+    TableEto table = this.service.getTable(id);
+    assertThat(table).isNotNull();
+    assertThat(table.getId()).isEqualTo(id);
+
+    int initialModificationCounter = table.getModificationCounter();
+
+    // when
+    table.setState(TableState.RESERVED);
+    table = this.service.saveTable(table);
+
+    // then
+    assertThat(table).isNotNull();
+    assertThat(table.getModificationCounter()).isEqualTo(initialModificationCounter + 1);
   }
 
   /**

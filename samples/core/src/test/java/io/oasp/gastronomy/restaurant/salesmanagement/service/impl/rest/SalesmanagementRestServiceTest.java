@@ -97,6 +97,51 @@ public class SalesmanagementRestServiceTest extends AbstractRestServiceTest {
     assertThat(responseOrderEto.getTableId()).isEqualTo(SAMPLE_TABLE_ID);
   }
 
+  // TODO evenutally needs to be updated due to sample value creation
+  /**
+   * This test method tests whether the modificationCounter is updated correctly.
+   */
+  @Test
+  public void testUnchangedOrderModificationCounter() {
+
+    // given
+    OrderCto sampleOrderCto = this.helper.createSampleOrderCto(SAMPLE_TABLE_ID);
+    OrderCto responseOrderCto = this.service.saveOrder(sampleOrderCto);
+    assertThat(responseOrderCto).isNotNull();
+
+    int initialModificationCounter = responseOrderCto.getOrder().getModificationCounter();
+
+    // when
+    responseOrderCto = this.service.saveOrder(responseOrderCto);
+    assertThat(responseOrderCto).isNotNull();
+
+    // then
+    assertThat(responseOrderCto.getOrder().getModificationCounter()).isEqualTo(initialModificationCounter);
+  }
+
+  // TODO evenutally needs to be updated due to sample value creation
+  /**
+   * This test method tests whether the modificationCounter is updated correctly.
+   */
+  @Test
+  public void testChangedOrderModificationCounter() {
+
+    // given
+    OrderCto sampleOrderCto = this.helper.createSampleOrderCto(SAMPLE_TABLE_ID);
+    OrderCto responseOrderCto = this.service.saveOrder(sampleOrderCto);
+    assertThat(responseOrderCto).isNotNull();
+
+    int initialModificationCounter = responseOrderCto.getOrder().getModificationCounter();
+
+    // when
+    responseOrderCto.getOrder().setState(OrderState.CLOSED);
+    responseOrderCto = this.service.saveOrder(responseOrderCto);
+    assertThat(responseOrderCto).isNotNull();
+
+    // then
+    assertThat(responseOrderCto.getOrder().getModificationCounter()).isEqualTo(initialModificationCounter + 1);
+  }
+
   /**
    * This test method creates some sample instances of {@link OrderCto} and saves them into the database. Thereafter all
    * {@link OrderCto} objects are loaded from the database. The method tests the number of loaded OrderCto and the
@@ -211,6 +256,61 @@ public class SalesmanagementRestServiceTest extends AbstractRestServiceTest {
     assertThat(responseFindOrderPositionEto.getState()).isEqualTo(SAMPLE_ORDER_POSITION_STATE);
     assertThat(responseFindOrderPositionEto.getDrinkState()).isEqualTo(SAMPLE_DRINK_STATE);
     assertThat(responseFindOrderPositionEto.getPrice()).isEqualTo(SAMPLE_PRICE);
+  }
+
+  // TODO evenutally needs to be updated due to sample value creation
+  /**
+   * This test method tests whether the modificationCounter is updated correctly.
+   */
+  @Test
+  public void testUnchangedOrderPositionModificationCounter() {
+
+    // given
+    OrderCto sampleOrderCto = this.helper.createSampleOrderCto(SAMPLE_TABLE_ID);
+    OrderCto responseOrderCto = this.service.saveOrder(sampleOrderCto);
+    assertThat(responseOrderCto).isNotNull();
+
+    OrderPositionEto sampleOrderPositionEto =
+        this.helper.createSampleOrderPositionEto(responseOrderCto.getOrder().getId());
+    OrderPositionEto responseOrderPositionEto = this.service.saveOrderPosition(sampleOrderPositionEto);
+    assertThat(responseOrderPositionEto).isNotNull();
+
+    int initialModificationCounter = responseOrderPositionEto.getModificationCounter();
+
+    // when
+    responseOrderPositionEto = this.service.saveOrderPosition(responseOrderPositionEto);
+    assertThat(responseOrderPositionEto).isNotNull();
+
+    // then
+    assertThat(responseOrderPositionEto.getModificationCounter()).isEqualTo(initialModificationCounter);
+  }
+
+  // TODO evenutally needs to be updated due to sample value creation
+  /**
+   * This test method tests whether the modificationCounter is updated correctly.
+   */
+  @Test
+  public void testChangedOrderPositionModificationCounter() {
+
+    // given
+    OrderCto sampleOrderCto = this.helper.createSampleOrderCto(SAMPLE_TABLE_ID);
+    OrderCto responseOrderCto = this.service.saveOrder(sampleOrderCto);
+    assertThat(responseOrderCto).isNotNull();
+
+    OrderPositionEto sampleOrderPositionEto =
+        this.helper.createSampleOrderPositionEto(responseOrderCto.getOrder().getId());
+    OrderPositionEto responseOrderPositionEto = this.service.saveOrderPosition(sampleOrderPositionEto);
+    assertThat(responseOrderPositionEto).isNotNull();
+
+    int initialModificationCounter = responseOrderPositionEto.getModificationCounter();
+
+    // when
+    responseOrderPositionEto.setState(OrderPositionState.CANCELLED);
+    responseOrderPositionEto = this.service.saveOrderPosition(responseOrderPositionEto);
+    assertThat(responseOrderPositionEto).isNotNull();
+
+    // then
+    assertThat(responseOrderPositionEto.getModificationCounter()).isEqualTo(initialModificationCounter + 1);
   }
 
   /**

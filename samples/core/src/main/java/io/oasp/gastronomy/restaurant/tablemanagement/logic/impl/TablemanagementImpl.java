@@ -1,5 +1,17 @@
 package io.oasp.gastronomy.restaurant.tablemanagement.logic.impl;
 
+import java.util.List;
+import java.util.Objects;
+
+import javax.annotation.security.RolesAllowed;
+import javax.inject.Inject;
+import javax.inject.Named;
+import javax.transaction.Transactional;
+import javax.validation.Valid;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import io.oasp.gastronomy.restaurant.general.common.api.constants.PermissionConstants;
 import io.oasp.gastronomy.restaurant.general.common.api.datatype.Role;
 import io.oasp.gastronomy.restaurant.general.common.api.exception.IllegalEntityStateException;
@@ -15,18 +27,6 @@ import io.oasp.gastronomy.restaurant.tablemanagement.logic.api.Tablemanagement;
 import io.oasp.gastronomy.restaurant.tablemanagement.logic.api.to.TableEto;
 import io.oasp.gastronomy.restaurant.tablemanagement.logic.api.to.TableSearchCriteriaTo;
 import io.oasp.module.jpa.common.api.to.PaginatedListTo;
-
-import java.util.List;
-import java.util.Objects;
-
-import javax.annotation.security.RolesAllowed;
-import javax.inject.Inject;
-import javax.inject.Named;
-import javax.transaction.Transactional;
-import javax.validation.Valid;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Implementation of {@link Tablemanagement}.
@@ -127,7 +127,7 @@ public class TablemanagementImpl extends AbstractComponentFacade implements Tabl
       }
     }
 
-    getTableDao().save(tableEntity);
+    tableEntity = getTableDao().save(tableEntity);
     LOG.debug("Table with id '{}' has been created.", tableEntity.getId());
     return getBeanMapper().map(tableEntity, TableEto.class);
   }
