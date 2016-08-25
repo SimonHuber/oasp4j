@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import io.oasp.gastronomy.restaurant.common.test.SampleCreator;
 import io.oasp.gastronomy.restaurant.general.common.base.AbstractRestServiceTest;
@@ -27,8 +25,6 @@ import io.oasp.module.jpa.common.api.to.PaginationTo;
  */
 
 public class SalesmanagementRestServiceTest extends AbstractRestServiceTest {
-
-  private static Logger LOG = LoggerFactory.getLogger(SalesmanagementRestServiceTest.class);
 
   private SalesmanagementRestService service;
 
@@ -82,7 +78,7 @@ public class SalesmanagementRestServiceTest extends AbstractRestServiceTest {
     OrderCto sampleOrderCto;
     OrderCto responseOrderCto;
 
-    ArrayList<OrderCto> savedOrderCtos = new ArrayList();
+    ArrayList<OrderCto> savedOrderCtos = new ArrayList<>();
     for (int i = 0; i < SampleCreator.NUMBER_OF_NEW_ORDERS; ++i) {
 
       sampleOrderCto = SampleCreator.createSampleOrderCto();
@@ -202,7 +198,7 @@ public class SalesmanagementRestServiceTest extends AbstractRestServiceTest {
     OrderPositionEto sampleOrderPositionEto;
     OrderPositionEto responseOrderPositionEto;
 
-    ArrayList<OrderPositionEto> savedOrderPositionEtos = new ArrayList();
+    ArrayList<OrderPositionEto> savedOrderPositionEtos = new ArrayList<>();
     for (int i = 0; i < SampleCreator.NUMBER_OF_NEW_ORDER_POSITIONS; ++i) {
       sampleOrderPositionEto = new OrderPositionEto();
       sampleOrderPositionEto.setOrderId(responseOrderCto.getOrder().getId());
