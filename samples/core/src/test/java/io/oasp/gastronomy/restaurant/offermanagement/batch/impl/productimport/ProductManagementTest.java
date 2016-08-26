@@ -27,7 +27,6 @@ import io.oasp.module.test.common.helper.api.DbTestHelper;
 /**
  * This is the test case of {@ProductDaoImpl}
  *
- * @author cmammado, shuber
  * @since dev
  */
 @SpringApplicationConfiguration(classes = { SpringBootApp.class })

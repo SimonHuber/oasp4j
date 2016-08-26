@@ -13,7 +13,6 @@ import io.oasp.gastronomy.restaurant.general.dataaccess.base.DatabaseMigrator;
 /**
  * Java configuration for JPA
  *
- * @author tkuzynow
  */
 @Configuration
 // @EnableTransactionManagement

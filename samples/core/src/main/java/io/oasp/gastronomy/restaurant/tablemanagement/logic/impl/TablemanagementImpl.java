@@ -31,7 +31,6 @@ import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 /**
  * Implementation of {@link Tablemanagement}.
  *
- * @author etomety
  */
 @Named
 @Transactional

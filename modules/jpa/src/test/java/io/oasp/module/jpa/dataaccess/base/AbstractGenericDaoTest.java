@@ -15,7 +15,6 @@ import io.oasp.module.test.common.base.ComponentTest;
 /**
  * Test class to test the {@link GenericDao}.
  *
- * @author fawinter
  */
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class })
 @ContextConfiguration({ "classpath:config/app/dataaccess/beans-dataaccess.xml" })

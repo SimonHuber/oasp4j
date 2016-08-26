@@ -29,7 +29,6 @@ import io.oasp.module.test.common.helper.api.DbTestHelper;
 /**
  * This is the test case for the component {@link Tablemanagement}.
  *
- * @author sroeger, shuber
  *
  */
 

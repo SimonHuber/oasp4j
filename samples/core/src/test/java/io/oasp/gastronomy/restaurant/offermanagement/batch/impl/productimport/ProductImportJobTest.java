@@ -24,7 +24,6 @@ import io.oasp.gastronomy.restaurant.offermanagement.logic.api.to.ProductEto;
 /**
  * End-To-End test job "import offer management from csv"
  *
- * @author jczas, shuber
  */
 @SpringApplicationConfiguration(classes = { SpringBootBatchApp.class }, locations = {
 "classpath:config/app/batch/beans-productimport.xml" })

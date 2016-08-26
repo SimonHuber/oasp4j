@@ -21,7 +21,6 @@ import io.oasp.module.test.common.helper.api.DbTestHelper;
  * <br/>
  * See {@link AbstractRestServiceTest} as an example.
  *
- * @author jmolinar, shuber
  */
 @Configuration
 @Profile(SpringProfileConstants.JUNIT)

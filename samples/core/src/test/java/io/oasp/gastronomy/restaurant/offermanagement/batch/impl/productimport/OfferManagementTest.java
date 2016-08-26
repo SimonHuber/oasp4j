@@ -29,7 +29,6 @@ import io.oasp.module.test.common.helper.api.DbTestHelper;
 /**
  * This is the test-case of {@link Offermanagement}
  *
- * @author cmammado, shuber
  * @since dev
  */
 

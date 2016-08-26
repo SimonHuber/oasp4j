@@ -27,7 +27,6 @@ import io.oasp.module.test.common.helper.api.DbTestHelper;
 /**
  * Base class for all spring batch integration tests. It helps to do End-to-End job tests.
  *
- * @author jczas, shuber
  */
 public abstract class AbstractSpringBatchIntegrationTest extends ComponentTest {
   private static final Logger LOG = LoggerFactory.getLogger(AbstractSpringBatchIntegrationTest.class);

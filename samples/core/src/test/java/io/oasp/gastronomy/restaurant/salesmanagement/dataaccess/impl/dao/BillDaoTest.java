@@ -24,7 +24,6 @@ import io.oasp.module.test.common.helper.api.DbTestHelper;
 /**
  * Test of {@link BillDao}.
  *
- * @author mvielsac, shuber
  */
 @Transactional
 @SpringApplicationConfiguration(classes = { SpringBootApp.class, RestaurantTestConfig.class })

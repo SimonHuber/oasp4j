@@ -16,7 +16,6 @@ import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 /**
  * This class serves as an example of how to perform a subsystem test (e.g., call a *RestService interface).
  *
- * @author geazzi, jmolinar, sroeger, shuber
  */
 
 public class TablemanagementRestServiceTest extends AbstractRestServiceTest {

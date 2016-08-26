@@ -24,7 +24,6 @@ import io.oasp.module.test.common.helper.api.DbTestHelper;
  * <br/>
  * The local server's port is randomly assigned.
  *
- * @author jmolinar, shuber
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = { RestaurantTestConfig.class, SpringBootApp.class })

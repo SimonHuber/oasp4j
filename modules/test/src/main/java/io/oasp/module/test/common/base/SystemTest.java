@@ -11,7 +11,6 @@ import io.oasp.module.test.common.api.category.CategorySystemTest;
  *
  * @see CategorySystemTest
  *
- * @author hohwille, shuber
  */
 @Category(CategorySystemTest.class)
 public abstract class SystemTest extends BaseTest {

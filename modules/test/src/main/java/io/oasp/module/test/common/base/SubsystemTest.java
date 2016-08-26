@@ -17,7 +17,6 @@ import io.oasp.module.test.common.helper.api.DbTestHelper;
  *
  * @see CategorySubsystemTest
  *
- * @author hohwille, shuber
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @TestExecutionListeners({ TransactionalTestExecutionListener.class, DependencyInjectionTestExecutionListener.class })

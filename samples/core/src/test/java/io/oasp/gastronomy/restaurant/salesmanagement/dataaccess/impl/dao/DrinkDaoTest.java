@@ -25,7 +25,6 @@ import io.oasp.module.test.common.helper.api.DbTestHelper;
 /**
  * Test class to test the {@link DrinkDao}.
  *
- * @author jmetzler, shuber
  */
 
 @SpringApplicationConfiguration(classes = { SpringBootApp.class })
@@ -55,8 +54,7 @@ public class DrinkDaoTest extends ComponentTest {
    * with the {@link Transactional} annotation, are executed in separate transaction, thus one test case can execute
    * multiple transactions.
    *
-   * @author jmetzler
-   */
+     */
   @Named
   static class DrinkDaoTestBean {
 

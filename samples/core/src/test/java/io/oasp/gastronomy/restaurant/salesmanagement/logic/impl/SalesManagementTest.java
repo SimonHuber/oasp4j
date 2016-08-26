@@ -23,7 +23,6 @@ import io.oasp.module.test.common.helper.api.DbTestHelper;
 /**
  * This is the test-case of {@link Salesmanagement}.
  *
- * @author hohwille, sroeger, shuber
  */
 @SpringApplicationConfiguration(classes = { SpringBootApp.class })
 @WebAppConfiguration

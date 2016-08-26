@@ -22,7 +22,6 @@ import io.oasp.module.test.common.base.ModuleTest;
  * This class provides a basic implementation of a {@code ComponentTest} which employs the Mockito framework to provide
  * fake objects to the SUT.
  *
- * @author jmolinar, shuber
  */
 public class TablemanagementImplTest extends ModuleTest {
 
