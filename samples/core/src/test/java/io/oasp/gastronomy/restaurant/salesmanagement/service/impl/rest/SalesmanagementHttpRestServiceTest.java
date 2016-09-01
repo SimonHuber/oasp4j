@@ -23,7 +23,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import io.oasp.gastronomy.restaurant.common.test.SampleCreator;
-import io.oasp.gastronomy.restaurant.general.common.base.AbstractRestServiceTest;
+import io.oasp.gastronomy.restaurant.general.common.base.RestServiceTest;
 import io.oasp.gastronomy.restaurant.salesmanagement.common.api.OrderPosition;
 import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.OrderCto;
 import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.OrderEto;
@@ -37,7 +37,7 @@ import io.oasp.gastronomy.restaurant.salesmanagement.service.api.rest.Salesmanag
  * @author shuber
  */
 
-public class SalesmanagementHttpRestServiceTest extends AbstractRestServiceTest {
+public class SalesmanagementHttpRestServiceTest extends RestServiceTest {
 
   private final HttpHeaders AUTHENTIFICATED_HEADERS = getAuthentificatedHeaders();
 

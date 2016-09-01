@@ -22,7 +22,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import io.oasp.gastronomy.restaurant.SpringBootBatchApp;
-import io.oasp.gastronomy.restaurant.general.common.AbstractSpringBatchIntegrationTest;
+import io.oasp.gastronomy.restaurant.general.common.SpringBatchIntegrationTest;
 
 /**
  * End-To-End test job "import offer management from csv"
@@ -34,8 +34,8 @@ import io.oasp.gastronomy.restaurant.general.common.AbstractSpringBatchIntegrati
 @WebAppConfiguration
 @TestPropertySource(properties = {
 "flyway.locations=filesystem:src/test/resources/db/batch/BillExportJobTest,filesystem:src/test/resources/db/default" })
-public class BillExportJobTest extends AbstractSpringBatchIntegrationTest {
-  private static final Logger LOG = LoggerFactory.getLogger(AbstractSpringBatchIntegrationTest.class);
+public class BillExportJobTest extends SpringBatchIntegrationTest {
+  private static final Logger LOG = LoggerFactory.getLogger(SpringBatchIntegrationTest.class);
 
   @Inject
   private Job billExportJob;

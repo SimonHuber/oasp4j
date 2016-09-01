@@ -23,7 +23,7 @@ import io.oasp.gastronomy.restaurant.offermanagement.logic.api.to.OfferEto;
 import io.oasp.gastronomy.restaurant.offermanagement.logic.api.to.OfferFilter;
 import io.oasp.gastronomy.restaurant.offermanagement.logic.api.to.OfferSortBy;
 import io.oasp.module.jpa.common.api.to.OrderDirection;
-import io.oasp.module.test.common.base.ComponentTest;
+import io.oasp.module.test.common.base.DbComponentTest;
 import io.oasp.module.test.common.helper.api.DbTestHelper;
 
 /**
@@ -35,7 +35,7 @@ import io.oasp.module.test.common.helper.api.DbTestHelper;
 
 @SpringApplicationConfiguration(classes = { SpringBootApp.class, RestaurantTestConfig.class })
 @WebAppConfiguration
-public class OfferManagementTest extends ComponentTest {
+public class OfferManagementTest extends DbComponentTest {
 
   @Inject
   private Offermanagement offerManagement;

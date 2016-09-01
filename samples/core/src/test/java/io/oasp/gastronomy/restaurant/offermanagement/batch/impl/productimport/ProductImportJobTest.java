@@ -15,7 +15,7 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import io.oasp.gastronomy.restaurant.SpringBootBatchApp;
-import io.oasp.gastronomy.restaurant.general.common.AbstractSpringBatchIntegrationTest;
+import io.oasp.gastronomy.restaurant.general.common.SpringBatchIntegrationTest;
 import io.oasp.gastronomy.restaurant.offermanagement.logic.api.Offermanagement;
 import io.oasp.gastronomy.restaurant.offermanagement.logic.api.to.DrinkEto;
 import io.oasp.gastronomy.restaurant.offermanagement.logic.api.to.MealEto;
@@ -32,7 +32,7 @@ import io.oasp.gastronomy.restaurant.offermanagement.logic.api.to.ProductEto;
 @WebAppConfiguration
 @TestPropertySource(properties = {
 "flyway.locations=filesystem:src/test/resources/db/batch/ProductImportJobTest,filesystem:src/test/resources/db/default" })
-public class ProductImportJobTest extends AbstractSpringBatchIntegrationTest {
+public class ProductImportJobTest extends SpringBatchIntegrationTest {
 
   @Inject
   private Job productImportJob;

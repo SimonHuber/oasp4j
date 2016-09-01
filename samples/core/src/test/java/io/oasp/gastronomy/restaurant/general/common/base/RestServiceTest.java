@@ -30,7 +30,7 @@ import io.oasp.module.test.common.helper.api.DbTestHelper;
 @SpringApplicationConfiguration(classes = { RestaurantTestConfig.class, SpringBootApp.class })
 @WebIntegrationTest
 @ActiveProfiles(profiles = { SpringProfileConstants.JUNIT })
-public abstract class AbstractRestServiceTest extends SubsystemTest {
+public abstract class RestServiceTest extends SubsystemTest {
 
   /**
    * The port of the web server during the test.
