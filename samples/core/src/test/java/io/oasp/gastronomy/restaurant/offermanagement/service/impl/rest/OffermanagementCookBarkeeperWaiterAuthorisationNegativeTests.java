@@ -22,7 +22,7 @@ import io.oasp.gastronomy.restaurant.offermanagement.service.api.rest.Offermanag
  * @author shuber
  * @since dev
  */
-
+// TODO implement parameterized function
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = { SpringBootApp.class })
 
