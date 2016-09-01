@@ -33,7 +33,7 @@ import io.oasp.gastronomy.restaurant.general.common.SpringBatchIntegrationTest;
 "classpath:/config/app/batch/beans-billexport.xml" })
 @WebAppConfiguration
 @TestPropertySource(properties = {
-"flyway.locations=filesystem:src/test/resources/db/batch/BillExportJobTest,filesystem:src/test/resources/db/default" })
+"flyway.locations=filesystem:src/test/resources/db/migration/batch/BillExportJobTest,filesystem:src/test/resources/db/migration/default" })
 public class BillExportJobTest extends SpringBatchIntegrationTest {
   private static final Logger LOG = LoggerFactory.getLogger(SpringBatchIntegrationTest.class);
 

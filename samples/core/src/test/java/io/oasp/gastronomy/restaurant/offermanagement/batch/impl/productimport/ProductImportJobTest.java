@@ -31,7 +31,7 @@ import io.oasp.gastronomy.restaurant.offermanagement.logic.api.to.ProductEto;
 "classpath:/config/app/batch/beans-productimport.xml" })
 @WebAppConfiguration
 @TestPropertySource(properties = {
-"flyway.locations=filesystem:src/test/resources/db/batch/ProductImportJobTest,filesystem:src/test/resources/db/default" })
+"flyway.locations=filesystem:src/test/resources/db/migration/batch/ProductImportJobTest,filesystem:src/test/resources/db/migration/default" })
 public class ProductImportJobTest extends SpringBatchIntegrationTest {
 
   @Inject
