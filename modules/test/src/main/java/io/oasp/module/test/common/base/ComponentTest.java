@@ -46,7 +46,7 @@ public abstract class ComponentTest extends BaseTest {
   protected void doDatabaseSetUp() {
 
     if (dbNeedsReset()) {
-      getDbTestHelper().resetDatabase(null);
+      getDbTestHelper().resetDatabase();
     }
     setDbNeedsReset(true);
   }

@@ -11,6 +11,7 @@ import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameters;
 import org.springframework.batch.core.JobParametersBuilder;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import io.oasp.gastronomy.restaurant.SpringBootBatchApp;
@@ -27,8 +28,10 @@ import io.oasp.gastronomy.restaurant.offermanagement.logic.api.to.ProductEto;
  * @author jczas, shuber
  */
 @SpringApplicationConfiguration(classes = { SpringBootBatchApp.class }, locations = {
-"classpath:config/app/batch/beans-productimport.xml" })
+"classpath:/config/app/batch/beans-productimport.xml" })
 @WebAppConfiguration
+@TestPropertySource(properties = {
+"flyway.locations=filesystem:src/test/resources/db/batch/ProductImportJobTest,filesystem:src/test/resources/db/default" })
 public class ProductImportJobTest extends AbstractSpringBatchIntegrationTest {
 
   @Inject
@@ -48,7 +51,7 @@ public class ProductImportJobTest extends AbstractSpringBatchIntegrationTest {
   public void doDatabaseSetUp() {
 
     if (dbNeedsReset()) {
-      getDbTestHelper().resetDatabase(null);
+      getDbTestHelper().resetDatabase();
     }
     setDbNeedsReset(true);
   }

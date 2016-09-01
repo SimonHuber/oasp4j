@@ -51,7 +51,7 @@ public class BillExportJobTest extends AbstractSpringBatchIntegrationTest {
   public void doDatabaseSetUp() {
 
     if (dbNeedsReset()) {
-      getDbTestHelper().resetDatabase("0006");
+      getDbTestHelper().resetDatabase();
     }
     setDbNeedsReset(true);
   }

@@ -1,7 +1,6 @@
 package io.oasp.gastronomy.restaurant.general.common;
 
 import org.flywaydb.core.Flyway;
-import org.flywaydb.core.api.MigrationVersion;
 
 import io.oasp.module.test.common.helper.api.DbTestHelper;
 
@@ -14,18 +13,14 @@ import io.oasp.module.test.common.helper.api.DbTestHelper;
 public class DbTestHelperImpl implements DbTestHelper {
   private Flyway flyway;
 
-  private MigrationVersion migrationVersion;
-
   /**
    * The constructor.
    *
    * @param flyway an instance of type {@link Flyway}.
-   * @param migrationVersion.
    */
-  public DbTestHelperImpl(Flyway flyway, String migrationVersion) {
+  public DbTestHelperImpl(Flyway flyway) {
 
     this.flyway = flyway;
-    this.migrationVersion = MigrationVersion.fromVersion(migrationVersion);
   }
 
   @Override
@@ -35,20 +30,13 @@ public class DbTestHelperImpl implements DbTestHelper {
   }
 
   /**
-   * Calls {@link #dropDatabase()} internally, and migrates to the highest available migration (default) or to the
-   * {@code migrationVersion}.
+   * Calls {@link #dropDatabase()} internally, and migrates the database.
    */
   @Override
-  public void resetDatabase(String migrationVersion) {
+  public void resetDatabase() {
 
     dropDatabase();
 
-    if (migrationVersion != null) {
-      this.migrationVersion = MigrationVersion.fromVersion(migrationVersion);
-    }
-    if (this.migrationVersion != null) {
-      this.flyway.setTarget(this.migrationVersion);
-    }
     this.flyway.migrate();
   }
 }

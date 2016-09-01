@@ -1,7 +1,6 @@
 package io.oasp.gastronomy.restaurant.general.configuration;
 
 import org.flywaydb.core.Flyway;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -66,10 +65,9 @@ public class RestaurantTestConfig {
    * @return an instance of type {@link DbTestHelperImpl}.
    */
   @Bean
-  public DbTestHelper dbTestHelper(Flyway flyway,
-      @Value("${server.rest.test.flyway.migration}") String migrationVersion) {
+  public DbTestHelper dbTestHelper(Flyway flyway) {
 
-    return new DbTestHelperImpl(flyway, migrationVersion);
+    return new DbTestHelperImpl(flyway);
 
   }
 
