@@ -20,7 +20,7 @@ import io.oasp.gastronomy.restaurant.offermanagement.logic.api.to.ProductEto;
 import io.oasp.gastronomy.restaurant.offermanagement.logic.api.to.ProductFilter;
 import io.oasp.gastronomy.restaurant.offermanagement.logic.api.to.ProductSortBy;
 import io.oasp.module.jpa.common.api.to.OrderDirection;
-import io.oasp.module.test.common.base.ComponentTest;
+import io.oasp.module.test.common.base.ComponentDbTest;
 import io.oasp.module.test.common.helper.api.DbTestHelper;
 
 /**
@@ -31,7 +31,9 @@ import io.oasp.module.test.common.helper.api.DbTestHelper;
  */
 @SpringApplicationConfiguration(classes = { SpringBootApp.class })
 @WebAppConfiguration
-public class ProductManagementTest extends ComponentTest {
+// @TestPropertySource(properties = {
+// "flyway.locations=filesystem:src/test/resources/db/ProductManagementTest,filesystem:src/test/resources/db/default" })
+public class ProductManagementTest extends ComponentDbTest {
 
   @Inject
   private Offermanagement offerManagement;

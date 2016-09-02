@@ -19,7 +19,7 @@ import io.oasp.gastronomy.restaurant.salesmanagement.common.api.datatype.Product
 import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.Salesmanagement;
 import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.OrderEto;
 import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.OrderPositionEto;
-import io.oasp.module.test.common.base.ComponentTest;
+import io.oasp.module.test.common.base.ComponentDbTest;
 import io.oasp.module.test.common.helper.api.DbTestHelper;
 
 /**
@@ -29,7 +29,7 @@ import io.oasp.module.test.common.helper.api.DbTestHelper;
  */
 @SpringApplicationConfiguration(classes = { SpringBootApp.class })
 @WebAppConfiguration
-public class SalesManagementTest extends ComponentTest {
+public class SalesManagementTest extends ComponentDbTest {
 
   @Inject
   private Salesmanagement salesManagement;

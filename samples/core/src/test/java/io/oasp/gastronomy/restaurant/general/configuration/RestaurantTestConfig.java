@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Profile;
 import io.oasp.gastronomy.restaurant.general.common.DbTestHelperImpl;
 import io.oasp.gastronomy.restaurant.general.common.RestTestClientBuilder;
 import io.oasp.gastronomy.restaurant.general.common.SecurityTestHelper;
-import io.oasp.gastronomy.restaurant.general.common.base.AbstractRestServiceTest;
+import io.oasp.gastronomy.restaurant.general.common.base.RestServiceTest;
 import io.oasp.module.basic.configuration.SpringProfileConstants;
 import io.oasp.module.test.common.helper.api.DbTestHelper;
 
@@ -18,7 +18,7 @@ import io.oasp.module.test.common.helper.api.DbTestHelper;
  * following class annotation: {@code @SpringApplicationConfiguration(classes = RestaurantTestConfig.class)}. Hence,
  * beans provided by {@code @Bean} annotated methods will not be available outside the test configuration. <br/>
  * <br/>
- * See {@link AbstractRestServiceTest} as an example.
+ * See {@link RestServiceTest} as an example.
  *
  * @author jmolinar
  */

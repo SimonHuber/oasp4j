@@ -20,7 +20,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.test.SpringApplicationConfiguration;
 
-import io.oasp.gastronomy.restaurant.general.common.base.AbstractRestServiceTest;
+import io.oasp.gastronomy.restaurant.general.common.base.RestServiceTest;
 import io.oasp.gastronomy.restaurant.salesmanagement.common.api.datatype.OrderPositionState;
 import io.oasp.gastronomy.restaurant.salesmanagement.common.api.datatype.OrderState;
 import io.oasp.gastronomy.restaurant.salesmanagement.logic.api.to.OrderCto;
@@ -38,7 +38,7 @@ import io.oasp.module.jpa.common.api.to.PaginationTo;
  * @author shuber
  */
 @SpringApplicationConfiguration(classes = SalesmanagementRestTestConfiguration.class)
-public class SalesmanagementRestServiceTest extends AbstractRestServiceTest {
+public class SalesmanagementRestServiceTest extends RestServiceTest {
 
   private static Logger LOG = LoggerFactory.getLogger(SalesmanagementRestServiceTest.class);
 

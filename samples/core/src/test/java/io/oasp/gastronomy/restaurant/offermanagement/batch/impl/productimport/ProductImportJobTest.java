@@ -14,7 +14,7 @@ import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import io.oasp.gastronomy.restaurant.SpringBootBatchApp;
-import io.oasp.gastronomy.restaurant.general.common.AbstractSpringBatchIntegrationTest;
+import io.oasp.gastronomy.restaurant.general.common.SpringBatchIntegrationTest;
 import io.oasp.gastronomy.restaurant.offermanagement.logic.api.Offermanagement;
 import io.oasp.gastronomy.restaurant.offermanagement.logic.api.to.DrinkEto;
 import io.oasp.gastronomy.restaurant.offermanagement.logic.api.to.MealEto;
@@ -29,13 +29,29 @@ import io.oasp.gastronomy.restaurant.offermanagement.logic.api.to.ProductEto;
 @SpringApplicationConfiguration(classes = { SpringBootBatchApp.class }, locations = {
 "classpath:config/app/batch/beans-productimport.xml" })
 @WebAppConfiguration
-public class ProductImportJobTest extends AbstractSpringBatchIntegrationTest {
+public class ProductImportJobTest extends SpringBatchIntegrationTest {
 
   @Inject
   private Job productImportJob;
 
   @Inject
   private Offermanagement offermanagement;
+
+  @Override
+  public void doSetUp() {
+
+    super.doSetUp();
+    doDatabaseSetUp();
+  }
+
+  @Override
+  public void doDatabaseSetUp() {
+
+    if (dbNeedsReset()) {
+      getDbTestHelper().resetDatabase(null);
+    }
+    setDbNeedsReset(true);
+  }
 
   /**
    * @throws Exception thrown by JobLauncherTestUtils

@@ -21,7 +21,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import io.oasp.gastronomy.restaurant.general.common.api.security.UserData;
 import io.oasp.module.security.common.api.accesscontrol.AccessControlPermission;
 import io.oasp.module.security.common.base.accesscontrol.AccessControlGrantedAuthority;
-import io.oasp.module.test.common.base.ComponentTest;
+import io.oasp.module.test.common.base.ComponentDbTest;
 import io.oasp.module.test.common.helper.api.DbTestHelper;
 
 /**
@@ -30,8 +30,8 @@ import io.oasp.module.test.common.helper.api.DbTestHelper;
  * @author jczas, shuber
  */
 // @DirtiesContext(classMode = ClassMode.AFTER_CLASS)
-public abstract class AbstractSpringBatchIntegrationTest extends ComponentTest {
-  private static final Logger LOG = LoggerFactory.getLogger(AbstractSpringBatchIntegrationTest.class);
+public abstract class SpringBatchIntegrationTest extends ComponentDbTest {
+  private static final Logger LOG = LoggerFactory.getLogger(SpringBatchIntegrationTest.class);
 
   /** directory for temporary test files */
   private static final String TMP_DIR = "./tmp";

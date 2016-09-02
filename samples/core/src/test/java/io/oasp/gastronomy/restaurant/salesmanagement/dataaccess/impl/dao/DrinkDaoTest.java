@@ -19,7 +19,7 @@ import io.oasp.gastronomy.restaurant.common.builders.DrinkEntityBuilder;
 import io.oasp.gastronomy.restaurant.offermanagement.dataaccess.api.DrinkEntity;
 import io.oasp.gastronomy.restaurant.offermanagement.dataaccess.api.dao.DrinkDao;
 import io.oasp.module.jpa.dataaccess.api.RevisionMetadata;
-import io.oasp.module.test.common.base.ComponentTest;
+import io.oasp.module.test.common.base.ComponentDbTest;
 import io.oasp.module.test.common.helper.api.DbTestHelper;
 
 /**
@@ -30,7 +30,7 @@ import io.oasp.module.test.common.helper.api.DbTestHelper;
 
 @SpringApplicationConfiguration(classes = { SpringBootApp.class })
 @WebAppConfiguration
-public class DrinkDaoTest extends ComponentTest {
+public class DrinkDaoTest extends ComponentDbTest {
 
   @Inject
   DrinkDaoTestBean testBean;

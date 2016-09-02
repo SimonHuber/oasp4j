@@ -22,94 +22,94 @@ import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.web.WebAppConfiguration;
 
 import io.oasp.gastronomy.restaurant.SpringBootBatchApp;
-import io.oasp.gastronomy.restaurant.general.common.AbstractSpringBatchIntegrationTest;
+import io.oasp.gastronomy.restaurant.general.common.SpringBatchIntegrationTest;
 
-/**
- * End-To-End test job "import offer management from csv"
- *
- * @author jczas, shuber
+/***End-To-End test job"import offer management from csv"**
+
+@author jczas, shuber
  */
-@SpringApplicationConfiguration(classes = { SpringBootBatchApp.class }, locations = {
-"classpath:/config/app/batch/beans-billexport.xml" })
-@WebAppConfiguration
-@TestPropertySource(properties = {
-"flyway.locations=filesystem:src/test/resources/db/batch/BillExportJobTest,filesystem:src/test/resources/db/default" })
-public class BillExportJobTest extends AbstractSpringBatchIntegrationTest {
-  private static final Logger LOG = LoggerFactory.getLogger(AbstractSpringBatchIntegrationTest.class);
+ @SpringApplicationConfiguration(classes = { SpringBootBatchApp.class }, locations = {
+ "classpath:/config/app/batch/beans-billexport.xml" })
+ @WebAppConfiguration
+ @TestPropertySource(properties = {
+ "flyway.locations=filesystem:src/test/resources/db/batch/BillExportJobTest,filesystem:src/test/resources/db/default"
+ })
+ public class BillExportJobTest extends SpringBatchIntegrationTest {
+ private static final Logger LOG = LoggerFactory.getLogger(SpringBatchIntegrationTest.class);
 
-  @Inject
-  private Job billExportJob;
+ @Inject
+ private Job billExportJob;
 
-  @Override
-  public void doSetUp() {
+ @Override
+ public void doSetUp() {
 
-    super.doSetUp();
-    doDatabaseSetUp();
-  }
+ super.doSetUp();
+ doDatabaseSetUp();
+ }
 
-  @Override
-  public void doDatabaseSetUp() {
+ @Override
+ public void doDatabaseSetUp() {
 
-    if (dbNeedsReset()) {
-      getDbTestHelper().resetDatabase("0006");
-    }
-    setDbNeedsReset(true);
-  }
+ if (dbNeedsReset()) {
+ getDbTestHelper().resetDatabase("0006");
+ }
+ setDbNeedsReset(true);
+ }
 
-  /**
-   * @throws Exception thrown by JobLauncherTestUtils
-   */
-  @Test
-  public void testJob() throws Exception {
+ /**
+ * @throws Exception thrown by JobLauncherTestUtils
+ */
+ @Test
+ public void testJob() throws Exception {
 
-    // setup test data
-    File targetFile = new File("./tmp/bills.csv");
-    File expectedFile = new ClassPathResource("BillExportJobTest/expected/bills.csv").getFile();
+ // setup test data
+ File targetFile = new File("./tmp/bills.csv");
+ File expectedFile = new ClassPathResource("BillExportJobTest/expected/bills.csv").getFile();
 
-    // configure job
-    JobParametersBuilder jobParameterBuilder = new JobParametersBuilder();
-    jobParameterBuilder.addString("bills.file", targetFile.getPath());
-    JobParameters jobParameters = jobParameterBuilder.toJobParameters();
+ // configure job
+ JobParametersBuilder jobParameterBuilder = new JobParametersBuilder();
+ jobParameterBuilder.addString("bills.file", targetFile.getPath());
+ JobParameters jobParameters = jobParameterBuilder.toJobParameters();
 
-    // run job
-    JobExecution jobExecution = getJobLauncherTestUtils(this.billExportJob).launchJob(jobParameters);
+ // run job
+ JobExecution jobExecution = getJobLauncherTestUtils(this.billExportJob).launchJob(jobParameters);
 
-    // check results
-    // - job status
-    assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
+ // check results
+ // - job status
+ assertThat(jobExecution.getStatus()).isEqualTo(BatchStatus.COMPLETED);
 
-    // - exported data
-    assertThat(targetFile.exists()).isTrue();
-    assertThat(expectedFile.exists()).isTrue();
+ // - exported data
+ assertThat(targetFile.exists()).isTrue();
+ assertThat(expectedFile.exists()).isTrue();
 
-    logFileContent(expectedFile);
-    logFileContent(targetFile);
+ logFileContent(expectedFile);
+ logFileContent(targetFile);
 
-    AssertFile.assertFileEquals(expectedFile, targetFile);
-  }
+ AssertFile.assertFileEquals(expectedFile, targetFile);
+ }
 
-  private void logFileContent(File file) {
+ private void logFileContent(File file) {
 
-    try {
-      LOG.debug("--> file content: " + file.getPath());
-      BufferedReader br = null;
+ try {
+ LOG.debug("--> file content: " + file.getPath());
+ BufferedReader br = null;
 
-      String line;
-      try {
-        br = new BufferedReader(new FileReader(file));
+ String line;
+ try {
+ br = new BufferedReader(new FileReader(file));
 
-        while ((line = br.readLine()) != null) {
-          LOG.debug(line);
-        }
-      } finally {
-        if (br != null) {
-          br.close();
-        }
-      }
-      LOG.debug("<-- file content: " + file.getPath());
-    } catch (IOException e) {
-      LOG.debug(e.toString());
-      e.printStackTrace();
-    }
-  }
-}
+ while ((line = br.readLine()) != null) {
+ LOG.debug(line);
+ }
+ } finally {
+ if (br != null) {
+ br.close();
+ }
+ }
+ LOG.debug("<-- file content: " + file.getPath());
+ } catch (IOException e) {
+ LOG.debug(e.toString());
+ e.printStackTrace();
+ }
+ }
+ }

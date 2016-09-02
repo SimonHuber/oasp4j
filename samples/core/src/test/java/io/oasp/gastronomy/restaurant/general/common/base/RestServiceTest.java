@@ -12,10 +12,12 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.fasterxml.jackson.jaxrs.json.JacksonJsonProvider;
 
 import io.oasp.gastronomy.restaurant.SpringBootApp;
+import io.oasp.gastronomy.restaurant.general.common.DbTestHelperImpl;
 import io.oasp.gastronomy.restaurant.general.common.RestTestClientBuilder;
 import io.oasp.gastronomy.restaurant.general.common.SecurityTestHelper;
 import io.oasp.gastronomy.restaurant.general.configuration.RestaurantTestConfig;
 import io.oasp.module.basic.configuration.SpringProfileConstants;
+import io.oasp.module.test.common.base.SubsystemDbTest;
 import io.oasp.module.test.common.base.SubsystemTest;
 import io.oasp.module.test.common.helper.api.DbTestHelper;
 
@@ -30,7 +32,7 @@ import io.oasp.module.test.common.helper.api.DbTestHelper;
 @SpringApplicationConfiguration(classes = { RestaurantTestConfig.class, SpringBootApp.class })
 @WebIntegrationTest
 @ActiveProfiles(profiles = { SpringProfileConstants.JUNIT })
-public abstract class AbstractRestServiceTest extends SubsystemTest {
+public abstract class RestServiceTest extends SubsystemDbTest {
 
   /**
    * The port of the web server during the test.

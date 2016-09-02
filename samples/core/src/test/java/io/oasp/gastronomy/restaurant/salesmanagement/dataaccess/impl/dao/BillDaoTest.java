@@ -18,7 +18,7 @@ import io.oasp.gastronomy.restaurant.general.common.api.datatype.Money;
 import io.oasp.gastronomy.restaurant.general.configuration.RestaurantTestConfig;
 import io.oasp.gastronomy.restaurant.salesmanagement.dataaccess.api.BillEntity;
 import io.oasp.gastronomy.restaurant.salesmanagement.dataaccess.api.dao.BillDao;
-import io.oasp.module.test.common.base.ComponentTest;
+import io.oasp.module.test.common.base.ComponentDbTest;
 import io.oasp.module.test.common.helper.api.DbTestHelper;
 
 /**
@@ -29,7 +29,7 @@ import io.oasp.module.test.common.helper.api.DbTestHelper;
 @Transactional
 @SpringApplicationConfiguration(classes = { SpringBootApp.class, RestaurantTestConfig.class })
 @WebAppConfiguration
-public class BillDaoTest extends ComponentTest {
+public class BillDaoTest extends ComponentDbTest {
 
   @Inject
   private BillDao billDao;

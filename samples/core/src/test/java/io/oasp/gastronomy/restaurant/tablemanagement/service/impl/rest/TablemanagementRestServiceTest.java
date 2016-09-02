@@ -5,7 +5,7 @@ import java.util.List;
 import org.junit.Test;
 
 import io.oasp.gastronomy.restaurant.common.builders.TableEtoBuilder;
-import io.oasp.gastronomy.restaurant.general.common.base.AbstractRestServiceTest;
+import io.oasp.gastronomy.restaurant.general.common.base.RestServiceTest;
 import io.oasp.gastronomy.restaurant.tablemanagement.common.api.datatype.TableState;
 import io.oasp.gastronomy.restaurant.tablemanagement.logic.api.to.TableEto;
 import io.oasp.gastronomy.restaurant.tablemanagement.logic.api.to.TableSearchCriteriaTo;
@@ -20,7 +20,7 @@ import io.oasp.module.jpa.common.api.to.PaginatedListTo;
 
 // , locations = {"file:src/test/resources/config" })
 
-public class TablemanagementRestServiceTest extends AbstractRestServiceTest {
+public class TablemanagementRestServiceTest extends RestServiceTest {
 
   private TablemanagementRestService service;
 
@@ -45,7 +45,7 @@ public class TablemanagementRestServiceTest extends AbstractRestServiceTest {
   }
 
   /**
-   * This test method serves as an example of how to use {@link AbstractRestServiceTest} in practice.
+   * This test method serves as an example of how to use {@link RestServiceTest} in practice.
    */
   @Test
   public void testFindTable() {
