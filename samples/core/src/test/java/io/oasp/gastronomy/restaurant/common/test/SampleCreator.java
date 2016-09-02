@@ -116,7 +116,7 @@ public class SampleCreator {
 
   // staffmanagement
 
-  public static final long SAMPLE_STAFF_MEMBER_ID = 0;
+  public static final long SAMPLE_STAFF_MEMBER_ID = 2L;
 
   public static final long SAMPLE_STAFF_MEMBER_LOGIN = 0;
 
